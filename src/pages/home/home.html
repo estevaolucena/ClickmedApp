@@ -14,4 +14,12 @@
     Take a look at the <code>src/pages/</code> directory to add or change tabs,
     update any existing page or create new pages.
   </p>
+  
+  <ion-fab right bottom edge class="home_fab">
+    <button ion-fab mini><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab (click)="cadastrarFilme()"><ion-icon name="add"></ion-icon></button>
+      <button ion-fab (click)="exibirFilmes()"><ion-icon name="search"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>
