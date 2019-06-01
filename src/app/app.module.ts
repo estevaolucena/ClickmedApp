@@ -9,6 +9,10 @@ import { CadastroPage } from '../pages/cadastro/cadastro';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { IntroPage } from '../pages/intro/intro';
+import { CadastroPacientePage } from '../pages/cadastro-paciente/cadastro-paciente';
+import { CadastroMedicoPage } from '../pages/cadastro-medico/cadastro-medico';
+import { CadastroClinicaPage } from '../pages/cadastro-clinica/cadastro-clinica';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -21,7 +25,10 @@ import { MedicoProvider } from '../providers/medico/medico';
     CadastroPage,
     HomePage,
     TabsPage,
-    IntroPage
+    IntroPage,
+    CadastroPacientePage,
+    CadastroMedicoPage,
+    CadastroClinicaPage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +42,10 @@ import { MedicoProvider } from '../providers/medico/medico';
     CadastroPage,
     HomePage,
     TabsPage,
-    IntroPage
+    IntroPage,
+    CadastroPacientePage,
+    CadastroMedicoPage,
+    CadastroClinicaPage
   ],
   providers: [
     StatusBar,
