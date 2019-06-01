@@ -1,0 +1,24 @@
+page-cadastro {
+
+    .register-btn{
+        margin-bottom: 15px;
+        display: inline-block;
+        background: #039be5;
+        background-size: 200% auto;
+        padding: 0px 10px;
+        color: #fff;
+        font-family: "Roboto", sans-serif;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 70px;
+        border-radius: 50px;
+        outline: none !important;
+        text-align: center;
+        cursor: pointer;
+        -moz-transition: all 0.3s ease 0s;
+        -o-transition: all 0.3s ease 0s;
+        transition: all 0.3s ease 0s;
+        border: 2px solid #fff;
+    }
+
+}

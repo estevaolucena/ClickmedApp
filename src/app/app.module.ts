@@ -5,7 +5,7 @@ import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 
 import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
+import { CadastroPage } from '../pages/cadastro/cadastro';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { IntroPage } from '../pages/intro/intro';
@@ -18,7 +18,7 @@ import { MedicoProvider } from '../providers/medico/medico';
   declarations: [
     MyApp,
     AboutPage,
-    ContactPage,
+    CadastroPage,
     HomePage,
     TabsPage,
     IntroPage
@@ -32,7 +32,7 @@ import { MedicoProvider } from '../providers/medico/medico';
   entryComponents: [
     MyApp,
     AboutPage,
-    ContactPage,
+    CadastroPage,
     HomePage,
     TabsPage,
     IntroPage
