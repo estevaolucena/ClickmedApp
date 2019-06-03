@@ -4,21 +4,19 @@ page-cadastro {
         margin-bottom: 15px;
         display: inline-block;
         background: #039be5;
-        background-size: 200% auto;
-        padding: 0px 10px;
         color: #fff;
         font-family: "Roboto", sans-serif;
         font-size: 18px;
         font-weight: bold;
-        line-height: 70px;
-        border-radius: 50px;
-        outline: none !important;
-        text-align: center;
-        cursor: pointer;
-        -moz-transition: all 0.3s ease 0s;
-        -o-transition: all 0.3s ease 0s;
-        transition: all 0.3s ease 0s;
+        height: 50px;
         border: 2px solid #fff;
     }
+
+    .register-btn.activated{
+        background: #fff;
+        color: #039be5;
+        border: 2px solid #fff;
+    }
+
 
 }

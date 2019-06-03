@@ -12,11 +12,14 @@ import { IntroPage } from '../pages/intro/intro';
 import { CadastroPacientePage } from '../pages/cadastro-paciente/cadastro-paciente';
 import { CadastroMedicoPage } from '../pages/cadastro-medico/cadastro-medico';
 import { CadastroClinicaPage } from '../pages/cadastro-clinica/cadastro-clinica';
+import { VisualizaMedicoPage } from '../pages/visualiza-medico/visualiza-medico';
+
 
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { MedicoProvider } from '../providers/medico/medico';
+import { PacienteProvider } from '../providers/paciente/paciente';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { MedicoProvider } from '../providers/medico/medico';
     IntroPage,
     CadastroPacientePage,
     CadastroMedicoPage,
-    CadastroClinicaPage
+    CadastroClinicaPage,
+    VisualizaMedicoPage
   ],
   imports: [
     BrowserModule,
@@ -45,13 +49,15 @@ import { MedicoProvider } from '../providers/medico/medico';
     IntroPage,
     CadastroPacientePage,
     CadastroMedicoPage,
-    CadastroClinicaPage
+    CadastroClinicaPage,
+    VisualizaMedicoPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    MedicoProvider
+    MedicoProvider,
+    PacienteProvider
   ]
 })
 export class AppModule {}

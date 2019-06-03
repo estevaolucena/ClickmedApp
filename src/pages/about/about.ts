@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { Medico } from '../../model/medico';
 import { MedicoProvider } from '../../providers/medico/medico';
+import { VisualizaMedicoPage } from '../visualiza-medico/visualiza-medico';
 
 @Component({
   selector: 'page-about',
@@ -29,6 +30,9 @@ export class AboutPage {
         console.log(error);
       }
       )
-    }    
+    }
+    visualizaMedico(medico: Medico) {
+      this.navCtrl.push(VisualizaMedicoPage, medico);
+    }
   }
   

@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the CadastroPacientePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { Paciente } from '../../model/paciente';
+import { PacienteProvider } from '../../providers/paciente/paciente';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 @IonicPage()
 @Component({
@@ -14,12 +10,28 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'cadastro-paciente.html',
 })
 export class CadastroPacientePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public paciente: Paciente;
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl:	ToastController, private pacienteProvider: PacienteProvider) {
+    this.paciente = new Paciente();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CadastroPacientePage');
+  }
+
+  inserirPaciente(){
+    console.log(this.paciente);
+    /* this.pacienteProvider.inserePaciente(this.paciente); */
+  }
+
+  exibirToast(dados) {
+    let t = this.toastCtrl.create({
+      message: dados,
+      duration: 3000,
+      position: "top"
+    });
+    t.present();
   }
 
 }

@@ -6,24 +6,24 @@
   
 </ion-header>
 <ion-content padding>
-  <form #formulario="ngForm">
+  <form (ngSubmit)="inserirPaciente(paciente)" #formulario="ngForm">
     <ion-item>
       <ion-label stacked>Nome:</ion-label>
-      <ion-input name="nome"></ion-input>
+      <ion-input [(ngModel)]="paciente.nome" name="nome"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Sobrenome:</ion-label>
-      <ion-input name="sobrenome"></ion-input>
+      <ion-input [(ngModel)]="paciente.sobrenome" name="sobrenome"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>E-mail (login):</ion-label>
-      <ion-input name="email"></ion-input>
+      <ion-input [(ngModel)]="paciente.usuario.email"  name="email"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>CPF:</ion-label>
-      <ion-input name="cpf"></ion-input>
+      <ion-input [(ngModel)]="paciente.cpf" name="cpf"></ion-input>
     </ion-item>
-    <ion-list radio-group>
+    <ion-list radio-group [(ngModel)]="paciente.sexo" name="sexo" >
       <ion-list-header>
         Sexo
       </ion-list-header>      
@@ -39,44 +39,44 @@
         <ion-label>Outro</ion-label>
         <ion-radio value="3" name="sexo"></ion-radio>
       </ion-item>
+    </ion-list>
       <ion-item>
         <ion-label>Data de nascimento</ion-label>
-        <ion-datetime displayFormat="DD MM YYYY" pickerFormat="DD MM YYYY" name="dataNascimento"></ion-datetime>
-      </ion-item>
-    </ion-list>
+        <ion-datetime [(ngModel)]="paciente.dataNascimento" displayFormat="DD MM YYYY" pickerFormat="DD MM YYYY" name="dataNascimento"></ion-datetime>
+      </ion-item>    
     <ion-item>
       <ion-label stacked>Telefone:</ion-label>
-      <ion-input name="telefone1"></ion-input>
+      <ion-input [(ngModel)]="paciente.telefone1" name="telefone1"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>CEP:</ion-label>
-      <ion-input name="cep"></ion-input>
+      <ion-input [(ngModel)]="paciente.cep" name="cep"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Rua, Av, Logradouro:</ion-label>
-      <ion-input name="rua"></ion-input>
+      <ion-input [(ngModel)]="paciente.nomeRua" name="rua"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Nº:</ion-label>
-      <ion-input name="numero"></ion-input>
+      <ion-input [(ngModel)]="paciente.numero" name="numero"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Bairro:</ion-label>
-      <ion-input name="bairro"></ion-input>
+      <ion-input [(ngModel)]="paciente.bairro" name="bairro"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Cidade:</ion-label>
-      <ion-input name="cidade"></ion-input>
+      <ion-input [(ngModel)]="paciente.cidade"  name="cidade"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>UF:</ion-label>
-      <ion-input name="estado"></ion-input>
+      <ion-input [(ngModel)]="paciente.estado"  name="estado"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Senha:</ion-label>
-      <ion-input type="password" name="senha" max-lenght="8"></ion-input>
+      <ion-input [(ngModel)]="paciente.usuario.senha" type="password" name="senha" max-lenght="8"></ion-input>
     </ion-item>
     <br>
-    <button ion-button full class="card-button">Cadastrar</button>  
+    <button ion-button full class="card-button" (click)="formulario.ngSubmit.emit()">Cadastrar</button>  
   </form>
 </ion-content>
