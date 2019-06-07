@@ -1,3 +1,3 @@
-export interface Medico{
+export class Medico{
 
 }

@@ -1,38 +1,31 @@
 
-<ion-header>
-
-  <ion-navbar>
-  </ion-navbar>
-
-</ion-header>
-
-
 <ion-content>
   <ion-slides pager>
-    <ion-slide class="slide_image">
+    <ion-slide class="slide_image container-azul">
       <img src="">
-      <h2>Bem vindo ao Pipoca</h2>
+      <h2 class="title-app">Clickmed</h2>
       <div>
-        <p>Pensa num app bom</p>
-        <p>Pensou? É esse!</p>
+        <p>Pesquise por médicos</p>
+        <p>de maneira prática e fácil</p>
       </div>   
     </ion-slide>  
     
     <ion-slide class="slide_image">
       <img src="">
-      <h2>Passa para o próximo</h2>
+      <ion-icon name="ios-search-outline" class="intro-icon-azul"></ion-icon>
       <div>
-        <p>Um pouco de texto</p>
-        <p>Mais	algum	texto</p>
+        <p>Encontre profissionais capacitados e</p>
+        <p>veja o que outros pacientes dizem sobre ele.</p>
       </div> 
     </ion-slide>
     
-    <ion-slide class="slide_image">
+    <ion-slide class="slide_image container-azul">
       <img src="">
-      <h2>Só mais uma vez</h2>
+      <ion-icon name="ios-clipboard-outline" class="intro-icon-branco"></ion-icon>     
       <div>
-        <h2>Agora vai</h2>
-        <a (click)="goToTabsPage()">Continuar</a>
+        <p>Veja informações importantes</p>
+        <p>sobre seu médico.</p>
+        <button ion-button round color="light" (click)="goToTabsPage()">Continuar</button>
       </div> 
     </ion-slide>
   </ion-slides>

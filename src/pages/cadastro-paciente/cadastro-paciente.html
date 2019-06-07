@@ -17,7 +17,7 @@
     </ion-item>
     <ion-item>
       <ion-label stacked>E-mail (login):</ion-label>
-      <ion-input [(ngModel)]="paciente.usuario.email"  name="email"></ion-input>
+      <ion-input [(ngModel)]="paciente.usuario.email"  name="usuario.email"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>CPF:</ion-label>
@@ -74,7 +74,8 @@
     </ion-item>
     <ion-item>
       <ion-label stacked>Senha:</ion-label>
-      <ion-input [(ngModel)]="paciente.usuario.senha" type="password" name="senha" max-lenght="8"></ion-input>
+      <ion-input [(ngModel)]="paciente.usuario.senha" type="password" name="usuario.senha" max-lenght="8"></ion-input>
+      <ion-input [(ngModel)]="paciente.usuario.permissao" type="hidden" name="usuario.permissao" value="1"></ion-input>
     </ion-item>
     <br>
     <button ion-button full class="card-button" (click)="formulario.ngSubmit.emit()">Cadastrar</button>  

@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { Paciente } from '../../model/paciente';
 import { PacienteProvider } from '../../providers/paciente/paciente';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 @IonicPage()
 @Component({
@@ -10,10 +8,32 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
   templateUrl: 'cadastro-paciente.html',
 })
 export class CadastroPacientePage {
-  public paciente: Paciente;
+  public paciente = {
+    id: '',
+    nome: '',
+    sobrenome: '',
+    email: '',
+    cpf: '',
+    dataNascimento: '',
+    telefone1: '',
+    telefone2: '',
+    cidade: '',
+    estado: '',
+    nomeRua: '',
+    numero: '',
+    bairro: '',
+    cep: '',
+    foto: '',
+    usuario: {
+      id: '',
+      email: '',
+      senha: '',
+      permissao: ''
+    }
+  }
   
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl:	ToastController, private pacienteProvider: PacienteProvider) {
-    this.paciente = new Paciente();
+
   }
 
   ionViewDidLoad() {

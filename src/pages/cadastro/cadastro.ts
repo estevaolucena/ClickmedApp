@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { CadastroPacientePage } from '../cadastro-paciente/cadastro-paciente';
+import { CadastroMedicoPage } from '../cadastro-medico/cadastro-medico';
+import { CadastroClinicaPage } from '../cadastro-clinica/cadastro-clinica';
 
 @Component({
   selector: 'page-cadastro',
@@ -15,5 +17,12 @@ export class CadastroPage {
   goToCadastroPacientePage (){
     this.navCtrl.push(CadastroPacientePage);
   }
-  
+
+  goToCadastroMedicoPage (){
+    this.navCtrl.push(CadastroMedicoPage);
+  }
+
+  goToCadastroClinicaPage (){
+    this.navCtrl.push(CadastroClinicaPage);
+  }  
 }

@@ -1,12 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the CadastroClinicaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -14,12 +7,42 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'cadastro-clinica.html',
 })
 export class CadastroClinicaPage {
+  public clinica = {
+    id: '',
+    nomeFantasia: '',
+    razaoSocial: '',
+    cnpj: '',
+    email: '',
+    site: '',
+    telefone1: '',
+    telefone2: '',
+    cep: '',
+    rua: '',
+    numero: '',
+    bairro: '',
+    cidade: '',
+    estado: ''
+  }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl:	ToastController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CadastroClinicaPage');
+  }
+
+  inserirClinica(){
+    console.log(this.clinica);
+    /* this.pacienteProvider.inserePaciente(this.paciente); */
+  }
+
+  exibirToast(dados) {
+    let t = this.toastCtrl.create({
+      message: dados,
+      duration: 3000,
+      position: "top"
+    });
+    t.present();
   }
 
 }

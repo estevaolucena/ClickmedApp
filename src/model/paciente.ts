@@ -4,7 +4,6 @@ export class Paciente{
     id: number;
     nome: string;
     sobrenome: string;
-    email: string;
     cpf: string;
     dataNascimento: Date;
     telefone1: string;
@@ -17,5 +16,4 @@ export class Paciente{
     cep: string;
     foto: string;
     usuario: Usuario;
-
 }

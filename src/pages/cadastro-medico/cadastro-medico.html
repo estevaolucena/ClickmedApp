@@ -1,18 +1,56 @@
-<!--
-  Generated template for the CadastroMedicoPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
+  
   <ion-navbar>
-    <ion-title>CadastroMedico</ion-title>
+    <ion-title>Médico</ion-title>
   </ion-navbar>
-
+  
 </ion-header>
 
 
 <ion-content padding>
-
+  <form (ngSubmit)="inserirMedico(medico)" #formulario="ngForm">
+    <ion-item>
+      <ion-label stacked>CRM:</ion-label>
+      <ion-input [(ngModel)]="medico.crm" name="crm"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Nome:</ion-label>
+      <ion-input [(ngModel)]="medico.nome" name="nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Sobrenome:</ion-label>
+      <ion-input [(ngModel)]="medico.sobrenome" name="sobrenome"></ion-input>
+    </ion-item>
+    <ion-list radio-group [(ngModel)]="medico.sexo" name="sexo" >
+      <ion-list-header>
+        Sexo
+      </ion-list-header>      
+      <ion-item>
+        <ion-label>Masculino</ion-label>
+        <ion-radio value="1" name="sexo"></ion-radio>
+      </ion-item>      
+      <ion-item>
+        <ion-label>Feminino</ion-label>
+        <ion-radio value="2" name="sexo"></ion-radio>
+      </ion-item>      
+      <ion-item>
+        <ion-label>Outro</ion-label>
+        <ion-radio value="3" name="sexo"></ion-radio>
+      </ion-item>
+    </ion-list>   
+    <ion-item>
+      <ion-label stacked>Telefone:</ion-label>
+      <ion-input [(ngModel)]="medico.telefone1" name="telefone1"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>E-mail (login):</ion-label>
+      <ion-input [(ngModel)]="medico.email"  name="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Senha:</ion-label>
+      <ion-input [(ngModel)]="medico.senha" type="password" name="senha" max-lenght="8"></ion-input>
+    </ion-item>
+    <br>
+    <button ion-button full class="card-button" (click)="formulario.ngSubmit.emit()">Cadastrar</button>  
+  </form>
 </ion-content>
