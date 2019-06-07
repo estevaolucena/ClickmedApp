@@ -1,27 +1,25 @@
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
-import { Paciente } from '../../model/paciente';
-
+import { Clinica } from '../../model/clinica';
 
 @Injectable()
-export class PacienteProvider {
-  
-  private baseApiPath = '/api' + '/api/paciente'; 
-  public paciente:Paciente;
-  
+export class ClinicaProvider {
+  public clinica: Clinica;
+  private baseApiPath = '/api' + '/api/clinica'; 
+
   constructor(public http: Http) {
-    console.log('Hello PacienteProvider Provider');
+    console.log('Hello ClinicaProvider Provider');
   }
-  
-  listaPacientes() {
+
+  listaClinicas() {
     return this.http.get(this.baseApiPath);
   }
   
-  inserePaciente(paciente) {
+  insereClinica(clinica) {
     let header = new Headers();
     header.append('Content-Type', 'application/json');
     let options = new RequestOptions({headers: header});
-    this.http.post(this.baseApiPath, paciente, options)
+    this.http.post(this.baseApiPath, clinica, options)
     .subscribe(res => {
       console.log(res);
     }, (err) => {
@@ -29,4 +27,5 @@ export class PacienteProvider {
     })
     return true;
   }  
+
 }

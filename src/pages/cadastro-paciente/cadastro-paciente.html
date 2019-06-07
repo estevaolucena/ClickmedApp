@@ -75,7 +75,6 @@
     <ion-item>
       <ion-label stacked>Senha:</ion-label>
       <ion-input [(ngModel)]="paciente.usuario.senha" type="password" name="usuario.senha" max-lenght="8"></ion-input>
-      <ion-input [(ngModel)]="paciente.usuario.permissao" type="hidden" name="usuario.permissao" value="1"></ion-input>
     </ion-item>
     <br>
     <button ion-button full class="card-button" (click)="formulario.ngSubmit.emit()">Cadastrar</button>  

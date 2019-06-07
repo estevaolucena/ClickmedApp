@@ -6,6 +6,9 @@ import { PacienteProvider } from '../../providers/paciente/paciente';
 @Component({
   selector: 'page-cadastro-paciente',
   templateUrl: 'cadastro-paciente.html',
+  providers:[
+    PacienteProvider
+  ]
 })
 export class CadastroPacientePage {
   public paciente = {
@@ -28,21 +31,27 @@ export class CadastroPacientePage {
       id: '',
       email: '',
       senha: '',
-      permissao: ''
+      permissao: '1'
     }
   }
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl:	ToastController, private pacienteProvider: PacienteProvider) {
-
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              private toastCtrl:	ToastController, 
+              private pacienteProvider: PacienteProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CadastroPacientePage');
   }
 
-  inserirPaciente(){
-    console.log(this.paciente);
-    /* this.pacienteProvider.inserePaciente(this.paciente); */
+  inserirPaciente(){    
+    if (this.pacienteProvider.inserePaciente(this.paciente) == true) {
+      this.exibirToast ("Cadastro realizado com sucesso");
+      this.navCtrl.popToRoot();
+    } else {
+      this.exibirToast ("Ocorreu um erro.");
+    }
   }
 
   exibirToast(dados) {

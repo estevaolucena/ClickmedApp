@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { ClinicaProvider } from '../../providers/clinica/clinica';
 
 @IonicPage()
 @Component({
@@ -23,19 +24,25 @@ export class CadastroClinicaPage {
     cidade: '',
     estado: ''
   }
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl:	ToastController) {
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl:	ToastController, private clinicaProvider: ClinicaProvider) {
   }
-
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad CadastroClinicaPage');
   }
-
+  
   inserirClinica(){
     console.log(this.clinica);
-    /* this.pacienteProvider.inserePaciente(this.paciente); */
+    if (this.clinicaProvider.insereClinica(this.clinica) == true) {
+      this.exibirToast ("Cadastro realizado com sucesso");
+      this.navCtrl.popToRoot();
+    } else {
+      this.exibirToast ("Ocorreu um erro.");
+    }
   }
-
+  
+  
   exibirToast(dados) {
     let t = this.toastCtrl.create({
       message: dados,
@@ -44,5 +51,5 @@ export class CadastroClinicaPage {
     });
     t.present();
   }
-
+  
 }

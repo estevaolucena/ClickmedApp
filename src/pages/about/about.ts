@@ -16,23 +16,25 @@ export class AboutPage {
   
   public medicos : Medico [];
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, private medicoProvider: MedicoProvider) {
-  }
-  
-  ionViewDidLoad() {
-    this.medicoProvider.getMedicos().subscribe(
-      data => {
-        const response = (data as any);
-        const medicos = JSON.parse(response._body);
-        this.medicos = medicos;
-        console.log(medicos);
-      }, error => {
-        console.log(error);
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private medicoProvider: MedicoProvider) {
+    }
+    
+    ionViewDidLoad() {
+      this.medicoProvider.listaMedicos().subscribe(
+        data => {
+          const response = (data as any);
+          const medicos = JSON.parse(response._body);
+          this.medicos = medicos;
+          console.log(medicos);
+        }, error => {
+          console.log(error);
+        }
+        )
       }
-      )
+      visualizaMedico(medico: Medico) {
+        this.navCtrl.push(VisualizaMedicoPage, medico);
+      }
     }
-    visualizaMedico(medico: Medico) {
-      this.navCtrl.push(VisualizaMedicoPage, medico);
-    }
-  }
-  
+    

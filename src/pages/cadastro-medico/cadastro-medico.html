@@ -43,12 +43,30 @@
       <ion-input [(ngModel)]="medico.telefone1" name="telefone1"></ion-input>
     </ion-item>
     <ion-item>
+      <ion-label stacked>Selecione suas especialidades:</ion-label>
+      <ion-select [(ngModel)]="medico.especialidades" name="especialidades" multiple="true">
+        <ion-option *ngFor="let e of especialidades" [value] = "e">{{e.nome}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Local de atendimento:</ion-label>
+      <ion-select [(ngModel)]="medico.clinicas" name="clinicas" multiple="true">
+        <ion-option *ngFor="let cli of clinicas" [value] = "cli">{{cli.nomeFantasia}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Quais convênios você atende:</ion-label>
+      <ion-select [(ngModel)]="medico.convenios" name="convenios" multiple="true">
+        <ion-option *ngFor="let conv of convenios" [value] = "conv">{{conv.nome}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
       <ion-label stacked>E-mail (login):</ion-label>
-      <ion-input [(ngModel)]="medico.email"  name="email"></ion-input>
+      <ion-input [(ngModel)]="medico.usuario.email"  name="usuario.email"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Senha:</ion-label>
-      <ion-input [(ngModel)]="medico.senha" type="password" name="senha" max-lenght="8"></ion-input>
+      <ion-input [(ngModel)]="medico.usuario.senha" type="password" name="usuario.senha" max-lenght="8"></ion-input>
     </ion-item>
     <br>
     <button ion-button full class="card-button" (click)="formulario.ngSubmit.emit()">Cadastrar</button>  

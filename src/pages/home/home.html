@@ -5,5 +5,10 @@
     <h2 class="title-app">Clickmed</h2>
     <h4>Encontre médicos e agende consultas de maneira prática e fácil :)</h4>
   </div>
-  <ion-searchbar class="searchbar"></ion-searchbar>
+  <ion-searchbar placeholder="Pesquise pelo que desejar" 
+                 class="searchbar"
+                 [(ngModel)]="stringBusca"
+                 (keyup.enter)="buscaMedicos()"
+                 autocomplete="on"
+                 showCancelButton="true"></ion-searchbar>
 </ion-content>

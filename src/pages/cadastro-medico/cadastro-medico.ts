@@ -1,36 +1,138 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { Medico } from '../../model/medico';
 import { MedicoProvider } from '../../providers/medico/medico';
-
-/**
- * Generated class for the CadastroMedicoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Especialidade } from '../../model/especialidade';
+import { Clinica } from '../../model/clinica';
+import { Convenio } from '../../model/convenio';
+import { EspecialidadeProvider } from '../../providers/especialidade/especialidade';
+import { ClinicaProvider } from '../../providers/clinica/clinica';
+import { ConvenioProvider } from '../../providers/convenio/convenio';
 
 @IonicPage()
 @Component({
   selector: 'page-cadastro-medico',
   templateUrl: 'cadastro-medico.html',
+  providers:[
+    MedicoProvider,
+    EspecialidadeProvider
+  ]
 })
 export class CadastroMedicoPage {
-  public medico: Medico;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl:	ToastController) {
-    this.medico = new Medico();
+  public especialidades: Especialidade[];
+  public clinicas: Clinica[];
+  public convenios: Convenio[];
+  public medico = {
+    id: '',
+    crm: '',
+    nome: '',
+    sobrenome: '',
+    experienciaProfissional: '',
+    formacaoAcademica: '',
+    planosConvenio: '',
+    telefone1: '',
+    telefone2: '',
+    horaInicioAtendimento: '',
+    horaFimAtendimento: '',
+    diasAtendimento: '',
+    sexo: '',
+    usuario: {
+      id: '',
+      email: '',
+      senha: '',
+      permissao: '1'
+    },
+    convenios: {
+      id: '',
+      codConvenio: '',
+      nome: '',
+    },
+    clinicas: {
+      id: '',
+      nomeFantasia: '',
+      razaoSocial: '',
+      cnpj: '',
+      email: '',
+      site: '',
+      telefone1: '',
+      telefone2: '',
+      cep: '',
+      rua: '',
+      numero: '',
+      bairro: '',
+      cidade: '',
+      estado: '',
+    },
+    especialidades: {
+      id: '',
+      nome: '', 
+      outros: '',
+    }
   }
-
+  
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private toastCtrl:	ToastController,
+    private especialidadeProvider: EspecialidadeProvider,
+    private medicoProvider: MedicoProvider,
+    private convenioProvider: ConvenioProvider,
+    private clinicaProvider: ClinicaProvider) {
+  }
+    
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CadastroMedicoPage');
-  }
-
+    this.listarEspecialidades();
+    this.listarClinicas();
+    this.listarConvenios();
+  }   
+    
   inserirMedico(){
     console.log(this.medico);
-    /* this.pacienteProvider.inserePaciente(this.paciente); */
+    if (this.medicoProvider.insereMedico(this.medico) == true) {
+      this.exibirToast ("Cadastro realizado com sucesso");
+      this.navCtrl.popToRoot();
+    } else {
+      this.exibirToast ("Ocorreu um erro.");
+    }
   }
 
+  listarEspecialidades(){
+    this.especialidadeProvider.listaEspecialidades().subscribe(
+      data => {
+        const response = (data as any);
+        const especialidades = JSON.parse(response._body);
+        this.especialidades = especialidades;
+        console.log(especialidades);
+      }, error => {
+        console.log(error);
+      }
+    )
+  }
+
+  listarConvenios(){
+    this.convenioProvider.listaConvenios().subscribe(
+      data => {
+        const response = (data as any);
+        const convenios = JSON.parse(response._body);
+        this.convenios = convenios;
+        console.log(convenios);
+      }, error => {
+        console.log(error);
+      }
+    )
+  }
+
+  listarClinicas(){
+    this.clinicaProvider.listaClinicas().subscribe(
+      data => {
+        const response = (data as any);
+        const clinicas = JSON.parse(response._body);
+        this.clinicas = clinicas;
+        console.log(clinicas);
+      }, error => {
+        console.log(error);
+      }
+    )
+  }
+  
   exibirToast(dados) {
     let t = this.toastCtrl.create({
       message: dados,
@@ -39,5 +141,6 @@ export class CadastroMedicoPage {
     });
     t.present();
   }
-
+    
 }
+    

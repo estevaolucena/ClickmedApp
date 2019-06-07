@@ -1,17 +1,17 @@
 
 export class Clinica{
-    /* id: '',
-    nomeFantasia: '',
-    razaoSocial: '',
-    cnpj: '',
-    email: '',
-    site: '',
-    telefone1: '',
-    telefone2: '',
-    cep: '',
-    rua: '',
-    numero: '',
-    bairro: '',
-    cidade: '',
-    estado: '' */
+    id: number;
+    nomeFantasia: string;
+    razaoSocial: string;
+    cnpj: string;
+    email: string;
+    site: string;
+    telefone1: string;
+    telefone2: string;
+    cep: string;
+    rua: string;
+    numero: string;
+    bairro: string;
+    cidade: string;
+    estado: string; 
 }
