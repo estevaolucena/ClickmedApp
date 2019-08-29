@@ -17,6 +17,7 @@ export class CadastroPacientePage {
     sobrenome: '',
     email: '',
     cpf: '',
+    sexo:'',
     dataNascimento: '',
     telefone1: '',
     telefone2: '',
@@ -39,10 +40,6 @@ export class CadastroPacientePage {
               public navParams: NavParams, 
               private toastCtrl:	ToastController, 
               private pacienteProvider: PacienteProvider) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CadastroPacientePage');
   }
 
   inserirPaciente(){    

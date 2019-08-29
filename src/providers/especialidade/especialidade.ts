@@ -9,7 +9,6 @@ export class EspecialidadeProvider {
   public especialidade: Especialidade;
   
   constructor(public http: Http) {
-    console.log('Hello EspecialidadeProvider Provider');
   }
   
   listaEspecialidades() {

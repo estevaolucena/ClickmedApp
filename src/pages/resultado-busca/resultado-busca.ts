@@ -16,11 +16,7 @@ export class ResultadoBuscaPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.medicos = this.navParams.data;
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ResultadoBuscaPage');
-  }
-
+  
   visualizaMedico(medico: Medico) {
     this.navCtrl.push(VisualizaMedicoPage, medico);
   }

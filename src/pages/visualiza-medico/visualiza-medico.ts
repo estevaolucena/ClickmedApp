@@ -23,8 +23,4 @@ export class VisualizaMedicoPage {
     this.medico = this.navParams.data;
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad VisualizaMedicoPage');
-  }
-
 }

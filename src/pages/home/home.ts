@@ -4,6 +4,7 @@ import { BuscaProvider } from '../../providers/busca/busca';
 import { Medico } from '../../model/medico';
 import { ResultadoBuscaPage } from '../resultado-busca/resultado-busca';
 
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -16,7 +17,7 @@ export class HomePage {
     public navParams: NavParams, 
     private toastCtrl:	ToastController, 
     private buscaProvider: BuscaProvider) {
-    }
+  }
     
   buscaMedicos(){
     this.buscaProvider.busca(this.stringBusca).subscribe(
@@ -31,6 +32,6 @@ export class HomePage {
         console.log(error);
       }
     )
-  }  
+  }
 }
       

@@ -28,10 +28,6 @@ export class CadastroClinicaPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl:	ToastController, private clinicaProvider: ClinicaProvider) {
   }
   
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CadastroClinicaPage');
-  }
-  
   inserirClinica(){
     console.log(this.clinica);
     if (this.clinicaProvider.insereClinica(this.clinica) == true) {

@@ -8,7 +8,6 @@ export class ClinicaProvider {
   private baseApiPath = '/api' + '/api/clinica'; 
 
   constructor(public http: Http) {
-    console.log('Hello ClinicaProvider Provider');
   }
 
   listaClinicas() {

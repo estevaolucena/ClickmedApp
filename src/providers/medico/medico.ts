@@ -10,7 +10,6 @@ export class MedicoProvider {
   public medico: Medico;
   
   constructor(public http: Http) {
-    console.log('Hello MedicoProvider Provider');
   }
   
   listaMedicos() {

@@ -8,7 +8,6 @@ export class BuscaProvider {
   stringBusca: string;
   
   constructor(public http: Http) {
-    console.log('Hello BuscaProvider Provider');
   }
   
   busca(stringBusca) {

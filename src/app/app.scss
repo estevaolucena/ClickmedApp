@@ -16,7 +16,7 @@
 // automatically applied to the <body> element in the app.
 
 .container-azul{
-    background-color: #039be5;
+    background-image: linear-gradient(to right top, #039be5, #00a9e2, #00b4d4, #00bcbe, #00c3a5);
     color:white;
 }
 
@@ -54,9 +54,20 @@
 }
 
 .toolbar-background-md{
-    background-color: #039be5;
+    background-image: linear-gradient(to right top, #039be5, #00a9e2, #00b4d4, #00bcbe, #00c3a5);
 }
 
 .bar-button-default-md{
     color: #fff;
+}
+
+.tab-button{
+    color: white;
+}
+
+.tabbar{
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border: 1px solid #FAFAFA;
+    background-color: #00c3a5;
 }

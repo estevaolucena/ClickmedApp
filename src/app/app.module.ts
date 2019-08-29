@@ -1,11 +1,12 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyApp } from './app.component';
+import { ClickmedApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { AboutPage } from '../pages/about/about';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { HomePage } from '../pages/home/home';
+import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
 import { IntroPage } from '../pages/intro/intro';
 import { CadastroPacientePage } from '../pages/cadastro-paciente/cadastro-paciente';
@@ -21,10 +22,11 @@ import { BuscaProvider } from '../providers/busca/busca';
 import { ResultadoBuscaPage } from '../pages/resultado-busca/resultado-busca';
 import { EspecialidadeProvider } from '../providers/especialidade/especialidade';
 import { ConvenioProvider } from '../providers/convenio/convenio';
+import { AuthProvider } from '../providers/auth/auth';
 
 @NgModule({
   declarations: [
-    MyApp,
+    ClickmedApp,
     AboutPage,
     CadastroPage,
     HomePage,
@@ -35,15 +37,16 @@ import { ConvenioProvider } from '../providers/convenio/convenio';
     CadastroClinicaPage,
     VisualizaMedicoPage,
     ResultadoBuscaPage,
+    LoginPage,
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(ClickmedApp),
     HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
+    ClickmedApp,
     AboutPage,
     CadastroPage,
     HomePage,
@@ -53,7 +56,8 @@ import { ConvenioProvider } from '../providers/convenio/convenio';
     CadastroMedicoPage,
     CadastroClinicaPage,
     VisualizaMedicoPage,
-    ResultadoBuscaPage
+    ResultadoBuscaPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
@@ -66,7 +70,8 @@ import { ConvenioProvider } from '../providers/convenio/convenio';
     EspecialidadeProvider,
     ClinicaProvider,
     ConvenioProvider,
-    ConvenioProvider
+    ConvenioProvider,
+    AuthProvider
   ]
 })
 export class AppModule {}

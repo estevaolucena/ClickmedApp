@@ -1,22 +1,23 @@
 page-cadastro {
 
+    .register-buttons{
+        margin-top:50%;
+    }
+
+    .register-buttons h3{
+        text-align: center;
+    }
+
     .register-btn{
         margin-bottom: 15px;
         display: inline-block;
-        background: #039be5;
-        color: #fff;
+        background: #FFF;
+        color: #00c3a5;
         font-family: "Roboto", sans-serif;
         font-size: 18px;
         font-weight: bold;
         height: 50px;
-        border: 2px solid #fff;
+        border: 2px solid #00c3a5;
     }
-
-    .register-btn.activated{
-        background: #fff;
-        color: #039be5;
-        border: 2px solid #fff;
-    }
-
 
 }

@@ -9,7 +9,6 @@ export class ConvenioProvider {
   public convenio: Convenio;
   
   constructor(public http: Http) {
-    console.log('Hello ConvenioProvider Provider');
   }
   
   listaConvenios() {
