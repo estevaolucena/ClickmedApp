@@ -3,4 +3,5 @@ export class Usuario{
     email: string;
     permissao: string;
     senha: string;
+    authorization: string;
 }

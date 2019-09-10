@@ -7,25 +7,36 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
+  providers:[
+    AuthProvider
+  ]
 })
 export class LoginPage {
 
   public usuario ={
     email: '',
-    senha: ''
+    senha: '',
   }
+  public authorization: String;
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams,
-              private toastCtrl:	ToastController, 
-              private authProvider: AuthProvider) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private toastCtrl: ToastController, 
+    private authProvider: AuthProvider) {
   }
 
   login(){
-    if (this.authProvider.userAuth(this.usuario) == true) {
-      alert("Usuario logado");
-    } else {
-      this.exibirToast("Login e/ou senha incorretos");
+    if(this.usuario != null){
+      this.authorization = this.authProvider.userAuth(this.usuario);
+      console.log('Authorization retornada do provider: ' + this.authorization)
+      if (this.authorization != '') {
+        this.exibirToast('Usuário logado ' + this.usuario + 'Authorization ' + this.authorization);
+      } else {
+        this.exibirToast("Login e/ou senha incorretos");
+      }
+    }else{
+      this.exibirToast('Preencha o login e senha.');
     }
   }
 

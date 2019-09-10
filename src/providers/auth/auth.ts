@@ -6,24 +6,31 @@ import { Injectable } from '@angular/core';
 export class AuthProvider {
 
   
-  private baseApiPath = '/api' + '/api/auth';
+  private baseApiPath = "/api" + "/api/login";
   public usuario: Usuario;
+  public authorization: String;
 
   constructor(public http: Http) {
   }
 
   userAuth(usuario) {
+    
     let header = new Headers();
     header.append('Content-Type', 'application/json');
     let options = new RequestOptions({headers: header});
+    
     this.http.post(this.baseApiPath, usuario, options)
     .subscribe(res => {
-      return true;
+      this.authorization = res.headers.get('authorization');
+      if(this.authorization != null){
+        console.log("Auth no provider " + this.authorization);
+        return this.authorization;
+      }
     }, (err) => {
-      alert(err);
-      return false;
+      console.log(err);
+      return this.authorization = "Error";
     })
-    return null;
+    return this.authorization = "Retorno final";
   }
 }
 
