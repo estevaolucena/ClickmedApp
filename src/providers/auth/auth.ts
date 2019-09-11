@@ -24,7 +24,7 @@ export class AuthProvider {
       this.authorization = res.headers.get('authorization');
       if(this.authorization != ''){
         console.log("Auth no provider " + this.authorization);
-        this.storeToken(this.authorization, );
+        this.storeToken(this.authorization);
         return true;
       }
     }, (err) => {

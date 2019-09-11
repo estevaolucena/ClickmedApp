@@ -10,8 +10,8 @@ import { LoginPage } from '../login/login';
 })
 export class TabsPage {
 
-  tab1Root = HomePage;
-  tab3Root = CadastroPage;
+  tabHome = HomePage;
+  tabCadastro = CadastroPage;
   tabLogin = LoginPage;
 
   constructor(private navController: NavController) {
