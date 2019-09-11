@@ -1,7 +1,8 @@
+import { ToastProvider } from './../../providers/toast/toast';
 import { AuthProvider } from './../../providers/auth/auth';
 import { CadastroPage } from './../cadastro/cadastro';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -23,7 +24,7 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    private toastCtrl: ToastController, 
+    private toastProvider: ToastProvider, 
     private authProvider: AuthProvider) {
   }
 
@@ -31,7 +32,7 @@ export class LoginPage {
   
     if (this.usuario.email == '' || this.usuario.senha == ''){
       this.mensagem = "Usuário e/ou senha incorretos";
-      this.exibirToast(this.mensagem);
+      this.toastProvider.exibirToast(this.mensagem);
       return;
     }
 
@@ -41,11 +42,11 @@ export class LoginPage {
     
     if (this.userToken != '') {
       this.mensagem = 'Usuário logado';
-      this.exibirToast(this.mensagem);
+      this.toastProvider.exibirToast(this.mensagem);
       this.navCtrl.popToRoot();
     } else {
       this.mensagem = 'Login e/ou senha incorretos';
-      this.exibirToast(this.mensagem);
+      this.toastProvider.exibirToast(this.mensagem);
       return;
     }
     
@@ -54,14 +55,4 @@ export class LoginPage {
   goToRegister(){
     this.navCtrl.push(CadastroPage);
   }
-
-  exibirToast(dados) {
-    let t = this.toastCtrl.create({
-      message: dados,
-      duration: 3000,
-      position: "top"
-    });
-    t.present();
-  }
-
 }
