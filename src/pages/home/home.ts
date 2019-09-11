@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { BuscaProvider } from '../../providers/busca/busca';
 import { Medico } from '../../model/medico';
 import { ResultadoBuscaPage } from '../resultado-busca/resultado-busca';

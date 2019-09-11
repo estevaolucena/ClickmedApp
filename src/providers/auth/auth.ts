@@ -8,29 +8,45 @@ export class AuthProvider {
   
   private baseApiPath = "/api" + "/api/login";
   public usuario: Usuario;
-  public authorization: String;
+  public authorization: any;
 
   constructor(public http: Http) {
   }
 
-  userAuth(usuario) {
+  async userAuth(usuario) {
     
     let header = new Headers();
     header.append('Content-Type', 'application/json');
     let options = new RequestOptions({headers: header});
     
-    this.http.post(this.baseApiPath, usuario, options)
+    await this.http.post(this.baseApiPath, usuario, options)
     .subscribe(res => {
       this.authorization = res.headers.get('authorization');
-      if(this.authorization != null){
+      if(this.authorization != ''){
         console.log("Auth no provider " + this.authorization);
-        return this.authorization;
+        this.storeToken(this.authorization, );
+        return true;
       }
     }, (err) => {
       console.log(err);
-      return this.authorization = "Error";
+      return false;
     })
-    return this.authorization = "Retorno final";
+  }
+
+  public logout() {
+    this.clearToken();
+  }
+
+  public get getToken() {
+    return localStorage.getItem("token");
+  }
+
+  public storeToken(token: string) {
+      localStorage.setItem("token", token);
+  }
+
+  clearToken(): any {
+    localStorage.removeItem("token");
   }
 }
 

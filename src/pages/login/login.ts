@@ -17,7 +17,8 @@ export class LoginPage {
     email: '',
     senha: '',
   }
-  public authorization: String;
+  public userToken: String = '';
+  public mensagem: String = '';
 
   constructor(
     public navCtrl: NavController, 
@@ -26,18 +27,28 @@ export class LoginPage {
     private authProvider: AuthProvider) {
   }
 
-  login(){
-    if(this.usuario != null){
-      this.authorization = this.authProvider.userAuth(this.usuario);
-      console.log('Authorization retornada do provider: ' + this.authorization)
-      if (this.authorization != '') {
-        this.exibirToast('Usuário logado ' + this.usuario + 'Authorization ' + this.authorization);
-      } else {
-        this.exibirToast("Login e/ou senha incorretos");
-      }
-    }else{
-      this.exibirToast('Preencha o login e senha.');
+  onLogin(){
+  
+    if (this.usuario.email == '' || this.usuario.senha == ''){
+      this.mensagem = "Usuário e/ou senha incorretos";
+      this.exibirToast(this.mensagem);
+      return;
     }
+
+    this.authProvider.userAuth(this.usuario);
+    this.userToken = this.authProvider.getToken;
+    console.log('Authorization retornada do provider: ' + this.userToken)
+    
+    if (this.userToken != '') {
+      this.mensagem = 'Usuário logado';
+      this.exibirToast(this.mensagem);
+      this.navCtrl.popToRoot();
+    } else {
+      this.mensagem = 'Login e/ou senha incorretos';
+      this.exibirToast(this.mensagem);
+      return;
+    }
+    
   }
 
   goToRegister(){
