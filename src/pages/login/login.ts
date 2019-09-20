@@ -3,6 +3,7 @@ import { AuthProvider } from './../../providers/auth/auth';
 import { CadastroPage } from './../cadastro/cadastro';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -38,12 +39,11 @@ export class LoginPage {
 
     this.authProvider.userAuth(this.usuario);
     this.userToken = this.authProvider.getToken;
-    console.log('Authorization retornada do provider: ' + this.userToken)
     
-    if (this.userToken != '') {
-      this.mensagem = 'Usuário logado';
+    if (this.userToken) {
+      this.mensagem = 'Bem vindo';
       this.toastProvider.exibirToast(this.mensagem);
-      this.navCtrl.popToRoot();
+      this.navCtrl.push(HomePage);
     } else {
       this.mensagem = 'Login e/ou senha incorretos';
       this.toastProvider.exibirToast(this.mensagem);

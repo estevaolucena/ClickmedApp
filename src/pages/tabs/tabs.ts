@@ -11,7 +11,7 @@ import { LoginPage } from '../login/login';
 export class TabsPage {
 
   tabHome = HomePage;
-  tabCadastro = CadastroPage;
+  // tabCadastro = CadastroPage;
   tabLogin = LoginPage;
 
   constructor(private navController: NavController) {
