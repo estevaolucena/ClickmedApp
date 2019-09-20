@@ -23,6 +23,7 @@ import { ResultadoBuscaPage } from '../pages/resultado-busca/resultado-busca';
 import { EspecialidadeProvider } from '../providers/especialidade/especialidade';
 import { ConvenioProvider } from '../providers/convenio/convenio';
 import { AuthProvider } from '../providers/auth/auth';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { AuthProvider } from '../providers/auth/auth';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Geolocation,
     MedicoProvider,
     PacienteProvider,
     ClinicaProvider,
