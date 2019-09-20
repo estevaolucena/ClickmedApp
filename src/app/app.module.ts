@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { ClickmedApp } from './app.component';
 import { HttpModule } from '@angular/http';
-import { AboutPage } from '../pages/about/about';
+import { HttpClientModule } from '@angular/common/http';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
@@ -23,11 +23,12 @@ import { ResultadoBuscaPage } from '../pages/resultado-busca/resultado-busca';
 import { EspecialidadeProvider } from '../providers/especialidade/especialidade';
 import { ConvenioProvider } from '../providers/convenio/convenio';
 import { AuthProvider } from '../providers/auth/auth';
+import { ToastProvider } from '../providers/toast/toast';
+import { Interceptor } from '../providers/auth/interceptor.module';
 
 @NgModule({
   declarations: [
     ClickmedApp,
-    AboutPage,
     CadastroPage,
     HomePage,
     TabsPage,
@@ -42,12 +43,13 @@ import { AuthProvider } from '../providers/auth/auth';
   imports: [
     BrowserModule,
     IonicModule.forRoot(ClickmedApp),
-    HttpModule
+    HttpModule,
+    HttpClientModule,
+    Interceptor
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     ClickmedApp,
-    AboutPage,
     CadastroPage,
     HomePage,
     TabsPage,
@@ -71,7 +73,8 @@ import { AuthProvider } from '../providers/auth/auth';
     ClinicaProvider,
     ConvenioProvider,
     ConvenioProvider,
-    AuthProvider
+    AuthProvider,
+    ToastProvider
   ]
 })
 export class AppModule {}

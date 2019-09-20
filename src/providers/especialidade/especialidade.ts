@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Especialidade } from '../../model/especialidade';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http} from '@angular/http';
 
 @Injectable()
 export class EspecialidadeProvider {
