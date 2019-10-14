@@ -1,84 +1,130 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Medico } from '../../model/medico';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+//import { Medico } from '../../model/medico';
+import { Geolocation } from '@ionic-native/geolocation';
 import { Platform } from 'ionic-angular';
+
+import { ViewController } from 'ionic-angular';
+import { ElementRef, ViewChild, NgZone } from '@angular/core';
+import { ModalController } from 'ionic-angular';
+import { Http } from '@angular/http';
+
+// Biblioteca Geolocation usada: https://ionicframework.com/docs/v3/native/geolocation/
 declare var google;
-
-
-/**
- * Generated class for the VisualizaMedicoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
   selector: 'page-visualiza-medico',
   templateUrl: 'visualiza-medico.html',
 })
-export class VisualizaMedicoPage{
+export class VisualizaMedicoPage {
 
-  public medico: Medico;
+  medico: any; //Medico;
   map: any;
-  mapa;
+  mapa: String;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams , private geolocation: Geolocation, private platform: Platform) {
-    this.medico = this.navParams.data;
-    this.mapa = this.getMapa();
-    console.log( 'o medico: ' , this.medico )
+  markers: any = [];
+  autocomplete: any;
+  GoogleAutocomplete: any;
+  GooglePlaces: any;
+  geocoder: any
+  autocompleteItems: any;
+
+  coorResult = [];
+  agencyList = [];
+  addrsList = [];
+  coordList = [];
+  finalCoor = [];
+
+  @ViewChild('map') mapElement: ElementRef;
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams , 
+    private geolocation: Geolocation,
+    public viewCtrl: ViewController,
+    public platform: Platform,
+    public http: Http,
+    public zone: NgZone,
+    public modalCtrl: ModalController,
+  ){
+    this.geocoder = new google.maps.Geocoder;
+    this.medico = this.navParams.data;  
+    console.log('medicos: ', this.medico); 
+    this.getAllClinicas(this.medico);
   }
  
-  ionViewDidLoad() {
-  this.platform.ready().then(() => {
-    const position = new google.maps.LatLng(  return this.medico['clinicas'][0].rua + ', ' + this.medico['clinicas'][0].numero + ' - ' + this.medico['clinicas'][0].cidade + ', ' + this.medico['clinicas'][0].estado;);
- 
-    const mapOptions = {
-      zoom: 18,
-      center: position,
-      disableDefaultUI: true
-    }
+  ionViewWillEnter(){
+    this.initMap();
+  }
 
-    this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
- 
-    const marker = new google.maps.Marker({
-      position: position,
-      map: this.map
+  initMap(){
+    this.map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 14,
+      disableDefaultUI: true,
     });
-/*
-    this.geolocation.getCurrentPosition()
-      .then((resp) => {
-        const position = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
- 
-        const mapOptions = {
-          zoom: 18,
-          center: position
-        }
- 
-        this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
- 
-        const marker = new google.maps.Marker({
-          position: position,
-          map: this.map
-        });
- */
-       this.getMapa();  
-      }).catch((error) => {
-        console.log('Erro ao recuperar sua posição', error);
-      });
-    }
-      
-    
-   
-  private getEndereco() {
-    //console.log('endereco: ' , this.medico['clinicas'][0].rua + ', ' + this.medico['clinicas'][0].numero + ' - ' + this.medico['clinicas'][0].cidade + ', ' + this.medico['clinicas'][0].estado)
-   return this.medico['clinicas'][0].rua + ', ' + this.medico['clinicas'][0].numero + ' - ' + this.medico['clinicas'][0].cidade + ', ' + this.medico['clinicas'][0].estado; 
-   // return this.logradouro + ', ' + this.numero + ' - ' + this.bairro + ', ' + this.cidade + ' - ' + this.estado;
+    setTimeout(() => {
+    }, 400);
   }
- 
-  private getMapa() {
-    return 'https://maps.googleapis.com/maps/api/staticmap?zoom=15&size=400x400&markers=color:red|' + this.getEndereco() + '&key=AIzaSyCUuDGTji9puew4j7512PByi8HpKUXpe6s'
+  
+  getAllClinicas(medico){
+    console.log('Endereço clinicas: ', medico['clinicas']);     
+      for (var i = 0; i< medico['clinicas'].length; i++){
+        this.httpConverte(medico['clinicas'][i].nomeFantasia, medico['clinicas'][i].rua + ', ' + medico['clinicas'][i].numero + ' - ' + medico['clinicas'][i].cidade + ', ' + medico['clinicas'][i].estado);
+      }      
+  }
+
+  httpConverte(nomeFantasia, address){
+    this.http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + address + ',+BR&key=AIzaSyAvVri_2o8xcZ4mcpjctJlFcR93-_nIzwI')
+    .subscribe(res => {
+      this.coorResult = res.json().results;
+      console.log('CoorResult', this.coorResult[0].geometry.location.lat, this.coorResult[0].geometry.location.lng);
+      if (res.json().status === 'OK') {
+        this.addMarker(nomeFantasia, this.coorResult);
+        // this.addMarker(this.coorResult[0].geometry.location.lat, this.coorResult[0].geometry.location.lng);        
+        // const place = ({'lat': this.coorResult[0].geometry.location.lat, 'lng': this.coorResult[0].geometry.location.lng});
+      }else{
+        console.log('Opss...RETURN');
+        return;
+      } 
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  addMarker(nomeFantasia, results) {
+    let iconMed = 'assets/imgs/clickMarker.png';
+    let marker = new google.maps.Marker({
+      position: results[0].geometry.location,
+      map: this.map,
+      icon: iconMed,
+      title: nomeFantasia
+    });
+    if(results[0] && results[0] != undefined){
+      this.markers.push(marker);
+      this.map.setCenter(results[0].geometry.location);
+    }
+    let content = `<h4 class='pinMedColor'>` + nomeFantasia +` </h4>`;
+    this.addInfoWindow(marker, content);
+    marker.addListener('click', () => { 
+    });
+  }
+
+  addInfoWindow(marker, content) {
+    let infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
+    google.maps.event.addListener(marker, 'click', () => {
+      infoWindow.open(this.map, marker);
+    });
+  }
+
+  clearMarkers(){
+    for (var i = 0; i < this.markers.length; i++) {
+      console.log(this.markers[i])
+      this.markers[i].setMap(null);
+    }
+    this.markers = [];
   }
 
 }

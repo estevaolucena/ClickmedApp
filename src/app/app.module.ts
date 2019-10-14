@@ -23,7 +23,7 @@ import { ResultadoBuscaPage } from '../pages/resultado-busca/resultado-busca';
 import { EspecialidadeProvider } from '../providers/especialidade/especialidade';
 import { ConvenioProvider } from '../providers/convenio/convenio';
 import { AuthProvider } from '../providers/auth/auth';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @NgModule({
   declarations: [
