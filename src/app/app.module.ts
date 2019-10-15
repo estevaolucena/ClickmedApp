@@ -23,6 +23,7 @@ import { ResultadoBuscaPage } from '../pages/resultado-busca/resultado-busca';
 import { EspecialidadeProvider } from '../providers/especialidade/especialidade';
 import { ConvenioProvider } from '../providers/convenio/convenio';
 import { AuthProvider } from '../providers/auth/auth';
+import { Geolocation } from '@ionic-native/geolocation';
 import { ToastProvider } from '../providers/toast/toast';
 import { Interceptor } from '../providers/auth/interceptor.module';
 
@@ -65,6 +66,7 @@ import { Interceptor } from '../providers/auth/interceptor.module';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Geolocation,
     MedicoProvider,
     PacienteProvider,
     ClinicaProvider,
