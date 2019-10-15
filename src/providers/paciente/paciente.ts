@@ -20,12 +20,14 @@ export class PacienteProvider {
     let header = new Headers();
     header.append('Content-Type', 'application/json');
     let options = new RequestOptions({headers: header});
+
+    console.log('Paciente no provider ', paciente )
     this.http.post(this.baseApiPath, paciente, options)
-    .subscribe(res => {
-      console.log(res);
-    }, (err) => {
-      console.log(err);
-    })
-    return true;
+      .subscribe(res => {
+        console.log(res.json());
+      }, (error) => {
+        console.error(error)
+      })
+      return true
   }  
 }

@@ -1,17 +1,15 @@
 <ion-content padding center text-center class="container-azul">
   <ion-title class="title-app">ClickmedApp</ion-title>
-  <form (ngSubmit)="onLogin(usuario)" #formulario="ngForm">
-    
+  <form (ngSubmit)="onLogin(usuario)" #formulario="ngForm">    
     <ion-list>
         <ion-item>
           <ion-input [(ngModel)]="usuario.email" name="email" placeholder="Login"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input [(ngModel)]="usuario.senha" placeholder="Senha" name="senha"></ion-input>
+          <ion-input [(ngModel)]="usuario.senha" type="password" placeholder="Senha" name="senha"></ion-input>
       </ion-item>
     </ion-list>
+    <button ion-button full type="submit" >Entrar</button>
   </form>
-
-  <button ion-button full (click)="formulario.ngSubmit.emit()" >Entrar</button>
   <button ion-button full color="light" (click)="goToRegister()" >Cadastre-se</button>
 </ion-content>
