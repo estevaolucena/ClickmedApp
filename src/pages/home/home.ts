@@ -25,7 +25,7 @@ export class HomePage {
         const medicos = JSON.parse(response._body);
         this.medicos = medicos;
         console.log(medicos);
-        this.navCtrl.push(ResultadoBuscaPage); //medicos);
+        this.navCtrl.push(ResultadoBuscaPage, medicos);
         this.stringBusca ='';
       }, error => {
         console.log(error);
