@@ -7,6 +7,8 @@ import { Convenio } from '../../model/convenio';
 import { EspecialidadeProvider } from '../../providers/especialidade/especialidade';
 import { ClinicaProvider } from '../../providers/clinica/clinica';
 import { ConvenioProvider } from '../../providers/convenio/convenio';
+import { ToastProvider } from '../../providers/toast/toast';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -39,7 +41,12 @@ export class CadastroMedicoPage {
       id: '',
       email: '',
       senha: '',
-      permissao: '1'
+      ermissao:
+				[{
+				id: 1,
+				descricao: "medico",
+				permissao: 1
+			}]
     },
     convenios: {
       id: '',
@@ -71,7 +78,7 @@ export class CadastroMedicoPage {
   
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
-    private toastCtrl:	ToastController,
+    private toastProvider:	ToastProvider,
     private especialidadeProvider: EspecialidadeProvider,
     private medicoProvider: MedicoProvider,
     private convenioProvider: ConvenioProvider,
@@ -87,10 +94,10 @@ export class CadastroMedicoPage {
   inserirMedico(){
     console.log(this.medico);
     if (this.medicoProvider.insereMedico(this.medico) == true) {
-      this.exibirToast ("Cadastro realizado com sucesso");
-      this.navCtrl.popToRoot();
+      this.toastProvider.exibirToast("Cadastro realizado com sucesso");
+      this.navCtrl.push(HomePage);
     } else {
-      this.exibirToast ("Ocorreu um erro.");
+      this.toastProvider.exibirToast("Ocorreu um erro.");
     }
   }
 
@@ -100,7 +107,6 @@ export class CadastroMedicoPage {
         const response = (data as any);
         const especialidades = JSON.parse(response._body);
         this.especialidades = especialidades;
-        console.log(especialidades);
       }, error => {
         console.log(error);
       }
@@ -113,7 +119,6 @@ export class CadastroMedicoPage {
         const response = (data as any);
         const convenios = JSON.parse(response._body);
         this.convenios = convenios;
-        console.log(convenios);
       }, error => {
         console.log(error);
       }
@@ -126,20 +131,10 @@ export class CadastroMedicoPage {
         const response = (data as any);
         const clinicas = JSON.parse(response._body);
         this.clinicas = clinicas;
-        console.log(clinicas);
       }, error => {
         console.log(error);
       }
     )
-  }
-  
-  exibirToast(dados) {
-    let t = this.toastCtrl.create({
-      message: dados,
-      duration: 3000,
-      position: "top"
-    });
-    t.present();
   }
     
 }

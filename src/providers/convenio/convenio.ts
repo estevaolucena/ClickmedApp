@@ -5,7 +5,7 @@ import { Http } from '@angular/http';
 @Injectable()
 export class ConvenioProvider {
 
-  private baseApiPath = '/api' + '/rest/convenio';
+  private baseApiPath = '/api' + '/api/convenio';
   public convenio: Convenio;
   
   constructor(public http: Http) {
