@@ -41,10 +41,12 @@ export class CadastroMedicoPage {
       id: '',
       email: '',
       senha: '',
-      permissoes: {
-        permissao: '1',
-        descricao: 'medico',
-      }
+      ermissao:
+				[{
+				id: 1,
+				descricao: "medico",
+				permissao: 1
+			}]
     },
     convenios: {
       id: '',

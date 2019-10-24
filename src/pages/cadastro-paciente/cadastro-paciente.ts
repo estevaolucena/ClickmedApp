@@ -34,10 +34,12 @@ export class CadastroPacientePage {
       id: '',
       email: '',
       senha: '',
-      permissoes: {
-        permissao: '2',
-        descricao: 'paciente',
-      }
+      permissao:
+				[{
+				id: 2,
+				descricao: "paciente",
+				permissao: 2
+			}]
     }    
   }
   
