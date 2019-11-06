@@ -30,11 +30,16 @@ export class HomePage {
     private authProvider: AuthProvider) {
   }
 
-  pages:  PagesInterface[]
-
+  pages: PagesInterface[]
+  
+  ionViewDidLoad(){
+    this.menuItens()
+  }
+  
   menuItens(){
     if (this.userLogged() == true) {
       this.pages = [
+        {title: 'Meus dados', pageName: 'MeusDadosPage', icon: 'log-out'},
         {title: 'Sair', pageName: 'Logout', icon: 'log-out'}
       ] 
     } else {
@@ -46,28 +51,26 @@ export class HomePage {
   }
 
   openPage(page){
-    if(page.pageName == 'Logout'){
+    if(page.title == 'Sair'){
       this.logout()
+      return
     }
     let pageName = page.pageName
     this.navCtrl.push(pageName)
   }
-
-  ionViewCanEnter(){
-    this.menuItens()
+  
+  logout(){
+    this.authProvider.logout()
+    this.navCtrl.setRoot(HomePage)
+    this.navCtrl.setRoot(this.navCtrl.getActive().component);
   }
-
+  
   userLogged(){
     if(this.authProvider.getToken != null){
       return true
     }
   }
 
-  logout(){
-  this.authProvider.logout()
-  this.navCtrl.push(HomePage)
-  }
-    
   buscaMedicos(){
     if(this.stringBusca == null || this.stringBusca == ''){
       this.toastProvider.exibirToast('Pesquise pelo nome, especialidade ou localização :)');

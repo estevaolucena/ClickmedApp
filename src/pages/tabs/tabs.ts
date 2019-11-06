@@ -16,7 +16,7 @@ export class TabsPage {
   }
 
   goToHome(){
-    this.navController.setRoot(HomePage)
+    this.navController.popToRoot()
   }
 }
 
