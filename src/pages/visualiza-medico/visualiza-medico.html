@@ -5,7 +5,7 @@
 
 <ion-content [fullscreen]="true" padding class="container-grey">
   
-  <ion-card padding>    
+  <ion-card padding>
     <ion-item>
       <ion-avatar item-start>
         <img src="assets/imgs/default-avatar.png">
@@ -17,32 +17,31 @@
     <ion-row>
       <ion-col>
         <p class="title">Especialidades:</p> 
-        <a *ngFor="let especialidade of medico.especialidades"> <p class="pinMedColor">{{especialidade}}</p></a>
+        <a *ngFor="let especialidade of medico.especialidades"> {{especialidade.nome}}</a>
       </ion-col>
     </ion-row>
     <hr>
     <ion-row>
       <ion-col *ngFor="let	clinica of medico.clinicas">
-        <ion-icon class="pinMedColor" name="pin"></ion-icon>  {{clinica.rua}}, {{clinica.numero}} - {{clinica.cidade}}/{{clinica.estado}}
+        <ion-icon name="pin"></ion-icon>  {{clinica.rua}}, {{clinica.numero}} - {{clinica.cidade}}/{{clinica.estado}}
       </ion-col>
     </ion-row>
-    <hr>
     <ion-row>
       <ion-col>
         <p class="title" >Telefone: {{medico.telefone1}} | {{medico.telefone2}}</p>
       </ion-col>
     </ion-row>
-    <hr>
     <ion-row>
       <ion-col>
         <p class="title">Convênios:</p> 
-        <a *ngFor="let convenio of medico.convenios"> <p class="pinMedColor">{{convenio.nome}}</p><br></a>
+        <a *ngFor="let convenio of medico.convenios"> {{convenio.nome}}<br></a>
       </ion-col>
     </ion-row>
+    <hr>
     <ion-row>
       <ion-col>
         <p class="title">Avaliação dos pacientes: </p>
-        <h2 class="pinMedColor"> 
+        <h2> 
           <ion-icon name="star"></ion-icon>
           <ion-icon name="star"></ion-icon>
           <ion-icon name="star"></ion-icon>
@@ -57,7 +56,8 @@
     <ion-row>
       <ion-col>
         <h3 class="title">Experiência Profissional:</h3>
-        <p class="pinMedColor">{{medico.experienciaProfissional}}</p>
+        <hr>
+        <p>{{medico.experienciaProfissional}}</p>
       </ion-col>
     </ion-row>
   </ion-card>
@@ -66,7 +66,8 @@
     <ion-row>
       <ion-col>
         <h3 class="title">Formação Acadêmica:</h3>
-        <p class="pinMedColor">{{medico.formacaoAcademica}}</p>
+        <hr>
+        <p>{{medico.formacaoAcademica}}</p>
       </ion-col>
     </ion-row>
   </ion-card>
@@ -75,7 +76,7 @@
     <ion-row>
       <ion-col>
         <h5>Nome do usuário:</h5>
-        <p class="pinMedColor">Comentário do usuário:</p>
+        <p>Comentário do usuário:</p>
         <hr>
       </ion-col>
     </ion-row>
@@ -86,10 +87,10 @@
       <ion-col>
         <h5>Localização:</h5>
         <hr>
+        <div #map id="map"></div>
       </ion-col>
     </ion-row>
   </ion-card>
-  <div #map id="map"></div>
 </ion-content>
 
 
