@@ -1,15 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-//import { Medico } from '../../model/medico';
-import { Geolocation } from '@ionic-native/geolocation';
 import { Platform } from 'ionic-angular';
-
 import { ViewController } from 'ionic-angular';
 import { ElementRef, ViewChild, NgZone } from '@angular/core';
 import { ModalController } from 'ionic-angular';
 import { Http } from '@angular/http';
 
-// Biblioteca Geolocation usada: https://ionicframework.com/docs/v3/native/geolocation/
 declare var google;
 
 @IonicPage()
@@ -19,7 +15,7 @@ declare var google;
 })
 export class VisualizaMedicoPage {
 
-  medico: any; //Medico;
+  medico: any;
   map: any;
   mapa: String;
 
@@ -41,17 +37,14 @@ export class VisualizaMedicoPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams , 
-    private geolocation: Geolocation,
     public viewCtrl: ViewController,
     public platform: Platform,
     public http: Http,
     public zone: NgZone,
-    public modalCtrl: ModalController,
-  ){
-    this.geocoder = new google.maps.Geocoder;
-    this.medico = this.navParams.data;  
-    console.log('medicos: ', this.medico); 
-    this.getAllClinicas(this.medico);
+    public modalCtrl: ModalController,){
+      this.geocoder = new google.maps.Geocoder;
+      this.medico = this.navParams.data;  
+      this.getAllClinicas(this.medico);
   }
  
   ionViewWillEnter(){
@@ -62,6 +55,10 @@ export class VisualizaMedicoPage {
     this.map = new google.maps.Map(document.getElementById('map'), {
       zoom: 14,
       disableDefaultUI: true,
+      zoomControl: true,
+      scaleControl: true,
+      fullscreenControl: true,
+      streetViewControl: true,
     });
     setTimeout(() => {
     }, 400);
@@ -81,8 +78,6 @@ export class VisualizaMedicoPage {
       console.log('CoorResult', this.coorResult[0].geometry.location.lat, this.coorResult[0].geometry.location.lng);
       if (res.json().status === 'OK') {
         this.addMarker(nomeFantasia, this.coorResult);
-        // this.addMarker(this.coorResult[0].geometry.location.lat, this.coorResult[0].geometry.location.lng);        
-        // const place = ({'lat': this.coorResult[0].geometry.location.lat, 'lng': this.coorResult[0].geometry.location.lng});
       }else{
         console.log('Opss...RETURN');
         return;
