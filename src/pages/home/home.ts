@@ -4,24 +4,75 @@ import { BuscaProvider } from '../../providers/busca/busca';
 import { Medico } from '../../model/medico';
 import { ResultadoBuscaPage } from '../resultado-busca/resultado-busca';
 import { ToastProvider } from '../../providers/toast/toast';
+import { LoginPage } from '../../pages/login/login' 
+import { CadastroPage } from '../cadastro/cadastro';
+import { AuthProvider } from '../../providers/auth/auth';
 
+export interface PagesInterface {
+  title: String,
+  pageName: any,
+  icon: String
+}
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+
 export class HomePage {
   stringBusca: string;
   public medicos : Medico [];
-  
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     private buscaProvider: BuscaProvider,
-    private toastProvider: ToastProvider) {
+    private toastProvider: ToastProvider,
+    private authProvider: AuthProvider) {
   }
-    
+
+  pages: PagesInterface[]
+  
+  ionViewDidLoad(){
+    this.menuItens()
+  }
+  
+  menuItens(){
+    if (this.userLogged() == true) {
+      this.pages = [
+        {title: 'Meus dados', pageName: 'MeusDadosPage', icon: 'log-out'},
+        {title: 'Sair', pageName: 'Logout', icon: 'log-out'}
+      ] 
+    } else {
+      this.pages = [
+        {title: 'Login', pageName: LoginPage, icon: 'log-in'},
+        {title: 'Cadastre-se', pageName: CadastroPage, icon: 'person-add'},
+      ]      
+    }
+  }
+
+  openPage(page){
+    if(page.title == 'Sair'){
+      this.logout()
+      return
+    }
+    let pageName = page.pageName
+    this.navCtrl.push(pageName)
+  }
+  
+  logout(){
+    this.authProvider.logout()
+    this.navCtrl.setRoot(HomePage)
+    this.navCtrl.setRoot(this.navCtrl.getActive().component);
+  }
+  
+  userLogged(){
+    if(this.authProvider.getToken != null){
+      return true
+    }
+  }
+
   buscaMedicos(){
-    if(this.stringBusca == null){
+    if(this.stringBusca == null || this.stringBusca == ''){
       this.toastProvider.exibirToast('Pesquise pelo nome, especialidade ou localização :)');
       return
     }

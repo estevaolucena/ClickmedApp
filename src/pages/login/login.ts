@@ -43,7 +43,7 @@ export class LoginPage {
     if (this.userToken) {
       this.mensagem = 'Bem vindo';
       this.toastProvider.exibirToast(this.mensagem);
-      this.navCtrl.push(HomePage);
+      this.navCtrl.setRoot(HomePage);
     } else {
       this.mensagem = 'Login e/ou senha incorretos';
       this.toastProvider.exibirToast(this.mensagem);

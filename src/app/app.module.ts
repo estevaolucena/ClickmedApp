@@ -60,7 +60,7 @@ import { Interceptor } from '../providers/auth/interceptor.module';
     CadastroClinicaPage,
     VisualizaMedicoPage,
     ResultadoBuscaPage,
-    LoginPage
+    LoginPage,
   ],
   providers: [
     StatusBar,
