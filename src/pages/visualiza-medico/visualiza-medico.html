@@ -50,8 +50,10 @@
         </h2> 
       </ion-col>
     </ion-row>
+    <ion-row *ngIf="permissao == 2">
+      <button ion-button full class="card-button" (click)="avaliarMedico(medico)">Avaliar consulta</button>  
+    </ion-row>
   </ion-card>
-  
   <ion-card padding>    
     <ion-row>
       <ion-col>

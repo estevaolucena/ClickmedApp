@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Avaliação</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>  
+  <form (ngSubmit)= "inserirAvaliacao(avaliacao)" #formulario="ngForm">
+    <ion-item>
+     <h2 class="title"><h2>Como foi sua consulta com o {{medico.nome}}</h2></h2>
+      <ion-avatar item-start>
+        <img src="assets/imgs/default-avatar.png">
+      </ion-avatar>
+    </ion-item>
+    <ion-item>
+      <p class="title" >Como você avalia sua consulta?</p>
+      <ionic3-star-rating #rating  
+        activeIcon = "ios-star"
+        defaultIcon = "ios-star-outline"
+        activeColor = "#FFDF00"
+        defaultColor = "#A0A0A0"
+        readonly="false"
+        rating="0"  
+        fontSize = "32px"
+        (ratingChanged)="logRatingChange($event)">
+      </ionic3-star-rating>
+    </ion-item>
+    <ion-item>
+      <ion-label>Qual foi a data da sua consulta?</ion-label>
+      <ion-datetime [(ngModel)]="avaliacao.descricao" displayFormat="DD MM YYYY" pickerFormat="DD MM YYYY" name="descricao"></ion-datetime>
+    </ion-item>  
+    <ion-item>
+      <ion-label stacked>Quais foram os pontos fortes da sua consulta?</ion-label>
+      <ion-select [(ngModel)]="avaliacao.avaliacao" name="avaliacao" multiple="true">
+        <ion-option *ngFor="let t of tags" [value] = "t">{{t.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label stacked>Gostaria de fazer mais alguma observação? </ion-label>
+            <ion-textarea [(ngModel)]="avaliacao.comentario" name="comentario" 
+            maxlength="300" placeholder="Descreva um pouco da sua experiência">
+            </ion-textarea>
+    </ion-item>
+    <br>
+    <button ion-button full class="card-button" type="submit">Cadastrar</button>
+  </form>
+</ion-content>

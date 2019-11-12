@@ -1,4 +1,4 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { ClickmedApp } from './app.component';
@@ -26,6 +26,9 @@ import { AuthProvider } from '../providers/auth/auth';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ToastProvider } from '../providers/toast/toast';
 import { Interceptor } from '../providers/auth/interceptor.module';
+import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
+import { StarRatingModule } from 'ionic3-star-rating';
+import { AvaliacaoProvider } from '../providers/avaliacao/avaliacao';
 
 @NgModule({
   declarations: [
@@ -40,13 +43,15 @@ import { Interceptor } from '../providers/auth/interceptor.module';
     VisualizaMedicoPage,
     ResultadoBuscaPage,
     LoginPage,
+    AvaliacaoPage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(ClickmedApp),
     HttpModule,
     HttpClientModule,
-    Interceptor
+    Interceptor,
+    StarRatingModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -61,6 +66,7 @@ import { Interceptor } from '../providers/auth/interceptor.module';
     VisualizaMedicoPage,
     ResultadoBuscaPage,
     LoginPage,
+    AvaliacaoPage
   ],
   providers: [
     StatusBar,
@@ -76,7 +82,11 @@ import { Interceptor } from '../providers/auth/interceptor.module';
     ConvenioProvider,
     ConvenioProvider,
     AuthProvider,
-    ToastProvider
-  ]
+    ToastProvider,
+    AvaliacaoProvider
+  ],
+  schemas: [ 
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
 })
 export class AppModule {}

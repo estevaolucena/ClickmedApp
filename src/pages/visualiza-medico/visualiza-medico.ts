@@ -5,6 +5,9 @@ import { ViewController } from 'ionic-angular';
 import { ElementRef, ViewChild, NgZone } from '@angular/core';
 import { ModalController } from 'ionic-angular';
 import { Http } from '@angular/http';
+import { AvaliacaoPage } from '../avaliacao/avaliacao';
+import { Medico } from '../../model/medico';
+import { AuthProvider } from '../../providers/auth/auth';
 
 declare var google;
 
@@ -18,6 +21,7 @@ export class VisualizaMedicoPage {
   medico: any;
   map: any;
   mapa: String;
+  permissao: any;
 
   markers: any = [];
   autocomplete: any;
@@ -41,14 +45,27 @@ export class VisualizaMedicoPage {
     public platform: Platform,
     public http: Http,
     public zone: NgZone,
-    public modalCtrl: ModalController,){
+    public modalCtrl: ModalController,
+    public authProvider: AuthProvider){
       this.geocoder = new google.maps.Geocoder;
       this.medico = this.navParams.data;  
       this.getAllClinicas(this.medico);
   }
  
-  ionViewWillEnter(){
-    this.initMap();
+  ionViewDidLoad(){
+    this.initMap()
+    this.getUserProfile()
+  }
+
+  getUserProfile(){
+    let jsonObject = this.authProvider.getUser
+    let usuarioLogado = JSON.parse(jsonObject)
+    this.permissao = usuarioLogado.usuario.permissao.map(obj => obj.permissao)
+    return this.permissao
+  }
+
+  avaliarMedico(medico: Medico) {
+    this.navCtrl.push(AvaliacaoPage, medico);
   }
 
   initMap(){
@@ -65,17 +82,16 @@ export class VisualizaMedicoPage {
   }
   
   getAllClinicas(medico){
-    console.log('Endereço clinicas: ', medico['clinicas']);     
-      for (var i = 0; i< medico['clinicas'].length; i++){
-        this.httpConverte(medico['clinicas'][i].nomeFantasia, medico['clinicas'][i].rua + ', ' + medico['clinicas'][i].numero + ' - ' + medico['clinicas'][i].cidade + ', ' + medico['clinicas'][i].estado);
-      }      
+    for (var i = 0; i< medico['clinicas'].length; i++){
+      this.httpConverte(medico['clinicas'][i].nomeFantasia, medico['clinicas'][i].rua + ', ' + medico['clinicas'][i].numero + ' - ' + medico['clinicas'][i].cidade + ', ' + medico['clinicas'][i].estado);
+    }      
   }
 
   httpConverte(nomeFantasia, address){
     this.http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + address + ',+BR&key=AIzaSyAvVri_2o8xcZ4mcpjctJlFcR93-_nIzwI')
     .subscribe(res => {
       this.coorResult = res.json().results;
-      console.log('CoorResult', this.coorResult[0].geometry.location.lat, this.coorResult[0].geometry.location.lng);
+      // console.log('CoorResult', this.coorResult[0].geometry.location.lat, this.coorResult[0].geometry.location.lng);
       if (res.json().status === 'OK') {
         this.addMarker(nomeFantasia, this.coorResult);
       }else{
