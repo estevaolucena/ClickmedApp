@@ -43,4 +43,20 @@ export class AvaliacaoProvider {
           return
         })
   }
+
+  getAvaliacoesAprovadas(idMedico): Observable<any> {
+    var endpoint = "/api" + "/api/avaliacao/aprovada/" + idMedico + "/";
+    let header = new Headers();
+    let options = new RequestOptions({headers: header});
+
+    header.append('Content-Type', 'application/json');
+
+    return this.http.get(endpoint, options)
+        .map(res => {
+          return res.json()
+        }, (error) => {
+          console.error(error)
+          return
+        })
+  }
 }

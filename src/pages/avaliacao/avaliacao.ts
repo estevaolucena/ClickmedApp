@@ -48,6 +48,7 @@ export class AvaliacaoPage {
     let usuarioLogado = JSON.parse(jsonObject)
     this.avaliacao.paciente.id = usuarioLogado.id
     this.avaliacao.medico.id = this.medico.id
+    this.avaliacao.respostamed = "0"
     this.avaliacao.avaliacao = avaliacao.avaliacao.map(x=>x.name).join(", ")
     this.avaliacaoProvider.inserirAvaliacao(avaliacao)
     this.goToVisualizaMedico(this.medico)

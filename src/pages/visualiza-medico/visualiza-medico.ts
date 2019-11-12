@@ -9,6 +9,7 @@ import { AvaliacaoPage } from '../avaliacao/avaliacao';
 import { Medico } from '../../model/medico';
 import { AuthProvider } from '../../providers/auth/auth';
 import { AvaliacaoProvider } from '../../providers/avaliacao/avaliacao';
+import { Avaliacao } from '../../model/avaliacao';
 
 declare var google;
 
@@ -24,6 +25,7 @@ export class VisualizaMedicoPage {
   mapa: String
   permissao: any
   media: number
+  avaliacoesAprovadas: Avaliacao[]
 
   markers: any = [];
   autocomplete: any;
@@ -59,6 +61,14 @@ export class VisualizaMedicoPage {
     this.initMap()
     this.getUserProfile()
     this.getMedia()
+    this.getAvaliacoesAprovadas()
+  }
+
+  getAvaliacoesAprovadas(){
+    this.avaliacaoProvider.getAvaliacoesAprovadas(this.medico.id).subscribe((result) => {
+      this.avaliacoesAprovadas = result
+      return this.avaliacoesAprovadas
+    })
   }
 
   getMedia(){

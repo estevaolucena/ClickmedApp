@@ -56,7 +56,7 @@
       <button ion-button full class="card-button" (click)="avaliarMedico(medico)">Avaliar consulta</button>  
     </ion-row>
   </ion-card>
-  <ion-card padding>    
+  <ion-card padding *ngIf="medico.experienciaProfissional">    
     <ion-row>
       <ion-col>
         <h3 class="title">Experiência Profissional:</h3>
@@ -65,8 +65,7 @@
       </ion-col>
     </ion-row>
   </ion-card>
-  
-  <ion-card padding>    
+  <ion-card padding *ngIf="medico.formacaoAcademica">    
     <ion-row>
       <ion-col>
         <h3 class="title">Formação Acadêmica:</h3>
@@ -75,18 +74,44 @@
       </ion-col>
     </ion-row>
   </ion-card>
-  
-  <ion-card padding>    
-    <ion-row>
-      <ion-col>
-        <h5>Nome do usuário:</h5>
-        <p>Comentário do usuário:</p>
+
+  <ion-card padding *ngIf="avaliacoesAprovadas?.length > 0;else semAvaliacoes">
+    <h3 class="title">Opiniões dos pacientes:</h3>
+    <hr>
+    <ion-list>
+      <ion-item *ngFor="let avaliacao of avaliacoesAprovadas">
+        <ion-avatar item-start>
+          <img src="assets/imgs/default-avatar.png">
+        </ion-avatar>
+        <h2>{{avaliacao.paciente.nome}} {{avaliacao.paciente.sobrenome}}</h2>
+        <h4>{{avaliacao.descricao}}</h4>
+        <ionic3-star-rating #rating
+          activeIcon = "ios-star"
+          defaultIcon = "ios-star-outline"
+          activeColor = "#FFDF00"
+          defaultColor = "#A0A0A0"
+          readonly="true"
+          [rating]=avaliacao.pergunta1
+          fontSize = "18px">
+        </ionic3-star-rating>
+        <p>{{avaliacao.comentario}}</p>
         <hr>
-      </ion-col>
-    </ion-row>
+      </ion-item>
+    </ion-list>
   </ion-card>
-  
-<ion-card padding>    
+  <ng-template #semAvaliacoes>
+      <ion-card padding>    
+        <ion-row>
+          <ion-col>
+            <h3 class="title">Opiniões dos pacientes:</h3>
+            <hr>
+            <p>Este médico(a) ainda não possui avaliações.</p>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+  </ng-template>
+
+  <ion-card padding>    
     <ion-row>
       <ion-col>
         <h5>Localização:</h5>
