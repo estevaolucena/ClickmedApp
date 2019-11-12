@@ -67,7 +67,6 @@ export class AvaliacaoPage {
   }
 
   logRatingChange(rating){     
-    console.log("changed rating: ",rating);
     this.avaliacao.pergunta1 = rating;
   }
 }

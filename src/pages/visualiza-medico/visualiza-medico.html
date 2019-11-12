@@ -40,14 +40,16 @@
     <hr>
     <ion-row>
       <ion-col>
-        <p class="title">Avaliação dos pacientes: </p>
-        <h2> 
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star-half"></ion-icon>
-          <ion-icon name="star-outline"></ion-icon>
-        </h2> 
+        <p class="title" >Avaliação dos usuários</p>
+        <ionic3-star-rating #rating
+          activeIcon = "ios-star"
+          defaultIcon = "ios-star-outline"
+          activeColor = "#FFDF00"
+          defaultColor = "#A0A0A0"
+          readonly="true"
+          [rating]=media
+          fontSize = "32px">
+        </ionic3-star-rating>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="permissao == 2">

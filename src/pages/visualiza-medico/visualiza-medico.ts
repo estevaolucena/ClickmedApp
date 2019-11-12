@@ -8,6 +8,7 @@ import { Http } from '@angular/http';
 import { AvaliacaoPage } from '../avaliacao/avaliacao';
 import { Medico } from '../../model/medico';
 import { AuthProvider } from '../../providers/auth/auth';
+import { AvaliacaoProvider } from '../../providers/avaliacao/avaliacao';
 
 declare var google;
 
@@ -18,10 +19,11 @@ declare var google;
 })
 export class VisualizaMedicoPage {
 
-  medico: any;
-  map: any;
-  mapa: String;
-  permissao: any;
+  medico: any
+  map: any
+  mapa: String
+  permissao: any
+  media: number
 
   markers: any = [];
   autocomplete: any;
@@ -46,22 +48,35 @@ export class VisualizaMedicoPage {
     public http: Http,
     public zone: NgZone,
     public modalCtrl: ModalController,
-    public authProvider: AuthProvider){
-      this.geocoder = new google.maps.Geocoder;
-      this.medico = this.navParams.data;  
-      this.getAllClinicas(this.medico);
-  }
- 
+    public authProvider: AuthProvider,
+    public avaliacaoProvider: AvaliacaoProvider){
+      this.geocoder = new google.maps.Geocoder
+      this.medico = this.navParams.data  
+      this.getAllClinicas(this.medico)
+    }
+    
   ionViewDidLoad(){
     this.initMap()
     this.getUserProfile()
+    this.getMedia()
+  }
+
+  getMedia(){
+    this.avaliacaoProvider.getMedia(this.medico.id).subscribe((result) => {
+      this.media = result
+      return this.media
+    })
   }
 
   getUserProfile(){
     let jsonObject = this.authProvider.getUser
-    let usuarioLogado = JSON.parse(jsonObject)
-    this.permissao = usuarioLogado.usuario.permissao.map(obj => obj.permissao)
-    return this.permissao
+    if (jsonObject) {
+      let usuarioLogado = JSON.parse(jsonObject)
+      this.permissao = usuarioLogado.usuario.permissao.map(obj => obj.permissao)
+      return this.permissao
+    } else {
+      return this.permissao = 0
+    }
   }
 
   avaliarMedico(medico: Medico) {
