@@ -46,6 +46,8 @@ export class AuthProvider {
             let usuario = JSON.stringify(res.json())
             this.storeUser(usuario);
           }
+        }, (error) => {
+          console.error(error)
         })
   }
 

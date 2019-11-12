@@ -36,18 +36,19 @@ export class LoginPage {
       this.toastProvider.exibirToast(this.mensagem);
       return;
     }
-
-    this.authProvider.userAuth(this.usuario);
-    this.userToken = this.authProvider.getToken;
-    
-    if (this.userToken) {
-      this.mensagem = 'Bem vindo';
-      this.toastProvider.exibirToast(this.mensagem);
-      this.navCtrl.setRoot(HomePage);
-    } else {
-      this.mensagem = 'Login e/ou senha incorretos';
-      this.toastProvider.exibirToast(this.mensagem);
-      return;
+    else{
+      this.authProvider.userAuth(this.usuario);
+      this.userToken = this.authProvider.getToken;
+      
+      if (this.userToken) {
+        this.mensagem = 'Bem vindo';
+        this.toastProvider.exibirToast(this.mensagem);
+        this.navCtrl.setRoot(HomePage);
+      } else {
+        this.mensagem = 'Login e/ou senha incorretos';
+        this.toastProvider.exibirToast(this.mensagem);
+        return;
+      }
     }
     
   }

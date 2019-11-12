@@ -10,9 +10,7 @@ export class TabsPage {
   tabHome = HomePage;
 
   constructor(
-    private navController: NavController,
-    ) {
-
+    private navController: NavController) {
   }
 
   goToHome(){

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams} from 'ionic-angular';
 import { MedicoProvider } from '../../providers/medico/medico';
 import { Especialidade } from '../../model/especialidade';
 import { Clinica } from '../../model/clinica';
@@ -19,6 +19,7 @@ import { HomePage } from '../home/home';
     EspecialidadeProvider
   ]
 })
+
 export class CadastroMedicoPage {
   public especialidades: Especialidade[];
   public clinicas: Clinica[];
@@ -41,7 +42,7 @@ export class CadastroMedicoPage {
       id: '',
       email: '',
       senha: '',
-      ermissao:
+      permissao:
 				[{
 				id: 1,
 				descricao: "medico",
