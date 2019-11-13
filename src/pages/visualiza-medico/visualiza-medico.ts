@@ -26,6 +26,7 @@ export class VisualizaMedicoPage {
   permissao: any
   media: number
   avaliacoesAprovadas: Avaliacao[]
+  tagArray: any
 
   markers: any = [];
   autocomplete: any;
@@ -67,6 +68,12 @@ export class VisualizaMedicoPage {
   getAvaliacoesAprovadas(){
     this.avaliacaoProvider.getAvaliacoesAprovadas(this.medico.id).subscribe((result) => {
       this.avaliacoesAprovadas = result
+
+      for(var i = 0; i < this.avaliacoesAprovadas.length; i++){
+        let temp = this.avaliacoesAprovadas[i].avaliacao
+        this.tagArray = temp.split(',')
+        this.avaliacoesAprovadas[i].avaliacao = this.tagArray;
+      }      
       return this.avaliacoesAprovadas
     })
   }

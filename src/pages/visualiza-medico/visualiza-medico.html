@@ -40,7 +40,7 @@
     <hr>
     <ion-row>
       <ion-col>
-        <p class="title" >Avaliação dos usuários</p>
+        <p class="title" >Avaliação dos pacientes:</p>
         <ionic3-star-rating #rating
           activeIcon = "ios-star"
           defaultIcon = "ios-star-outline"
@@ -84,7 +84,7 @@
           <img src="assets/imgs/default-avatar.png">
         </ion-avatar>
         <h2>{{avaliacao.paciente.nome}} {{avaliacao.paciente.sobrenome}}</h2>
-        <h4>{{avaliacao.descricao}}</h4>
+        <h4 displayFormat="DD MM, YYYY HH:mm">{{avaliacao.descricao}}</h4>
         <ionic3-star-rating #rating
           activeIcon = "ios-star"
           defaultIcon = "ios-star-outline"
@@ -94,8 +94,13 @@
           [rating]=avaliacao.pergunta1
           fontSize = "18px">
         </ionic3-star-rating>
-        <p>{{avaliacao.comentario}}</p>
+        <p text-wrap>{{avaliacao.comentario}}</p>
         <hr>
+        <p class="title">Pontos fortes:</p> 
+        <ion-tags-input
+          [(ngModel)]=avaliacao.avaliacao
+          [readonly]="true">
+        </ion-tags-input>
       </ion-item>
     </ion-list>
   </ion-card>

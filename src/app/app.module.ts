@@ -29,6 +29,8 @@ import { Interceptor } from '../providers/auth/interceptor.module';
 import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
 import { StarRatingModule } from 'ionic3-star-rating';
 import { AvaliacaoProvider } from '../providers/avaliacao/avaliacao';
+import { IonTagsInputModule } from "ionic-tags-input";
+
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { AvaliacaoProvider } from '../providers/avaliacao/avaliacao';
     HttpClientModule,
     Interceptor,
     StarRatingModule,
+    IonTagsInputModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
