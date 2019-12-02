@@ -5,11 +5,9 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-
 <ion-content padding class="container-grey">
-  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-  <ion-card padding *ngFor="let	medico of medicos">
-    
+  <!-- <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar> -->
+  <ion-card padding *ngFor="let	medico of medicos">    
     <ion-item>
       <ion-avatar item-start>
         <img src="assets/imgs/default-avatar.png">
@@ -25,12 +23,13 @@
     </ion-row>
     <ion-row>
       <ion-col *ngFor="let	clinica of medico.clinicas">
+          <p class="title">Endereço: </p>
         <ion-icon name="pin"></ion-icon>  {{clinica.rua}}, {{clinica.numero}} - {{clinica.cidade}}/{{clinica.estado}}
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <p class="title" >Telefone: {{medico.telefone1}} | {{medico.telefone2}}</p>
+        <p class="title">Telefone: </p><a> {{medico.telefone1}} | {{medico.telefone2}}</a>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -39,7 +38,6 @@
         <a *ngFor="let convenio of medico.convenios"> {{convenio.nome}}<br></a>
       </ion-col>
     </ion-row>
-    <button ion-button full class="card-button" (click)="visualizaMedico(medico)">Visualizar</button>  
-    
+    <button ion-button full class="card-button" (click)="visualizaMedico(medico)">Visualizar</button>    
   </ion-card>  
 </ion-content>

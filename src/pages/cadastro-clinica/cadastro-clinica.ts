@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { ClinicaProvider } from '../../providers/clinica/clinica';
-import { ToastProvider } from '../../providers/toast/toast';
-import { HomePage } from '../home/home';
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -30,17 +29,35 @@ export class CadastroClinicaPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
-    private toastProvider:	ToastProvider, 
-    private clinicaProvider: ClinicaProvider) {
+    private clinicaProvider: ClinicaProvider,
+    private alertCtrl: AlertController) {
   }
   
   inserirClinica(){
     console.log(this.clinica);
     if (this.clinicaProvider.insereClinica(this.clinica) == true) {
-      this.toastProvider.exibirToast("Cadastro realizado com sucesso");
-      this.navCtrl.push(HomePage);
+      let alert = this.alertCtrl.create({
+        title: 'Sucesso',
+        message: 'Sua clínica foi cadastrada com sucesso!',
+        buttons: [
+          {
+            text: 'Entendi',
+            role: 'entendi',
+            handler: () => {
+              this.navCtrl.push(LoginPage);
+            }
+          }
+        ]
+      });
+      alert.present();
+      
     } else {
-      this.toastProvider.exibirToast("Ocorreu um erro.");
+      let alert = this.alertCtrl.create({
+        title: 'Ops',
+        subTitle: 'Parece que ocorreu um erro, tente novamente.',
+        buttons: ['Entendi']
+      });
+      alert.present();
     }
   }  
 }

@@ -15,16 +15,33 @@ export class AvaliacaoProvider {
     let options = new RequestOptions({headers: header});
 
     header.append('Content-Type', 'application/json');
+    console.log("Avaliacao no provider: ", avaliacao)
     
-    this.http.post(endpoint, avaliacao, options)
-      .subscribe(res => {
-      if (res.status == 200) {
-        return avaliacao
-      }      
+    return this.http.post(endpoint, avaliacao, options)
+      .map(res => {
+        if (res.status == 200) {
+        return res
+      }
     }, (err) => {
       console.error(err);
       return;
     })
+  }
+
+  getAvaliacoesAprovadas(idMedico): Observable<any> {
+    var endpoint = "/api" + "/api/avaliacao/aprovada/" + idMedico + "/";
+    let header = new Headers();
+    let options = new RequestOptions({headers: header});
+
+    header.append('Content-Type', 'application/json');
+
+    return this.http.get(endpoint, options)
+        .map(res => {
+          return res.json()
+        }, (error) => {
+          console.error(error)
+          return
+        })
   }
 
   getMedia(idMedico): Observable<any> {
@@ -38,22 +55,6 @@ export class AvaliacaoProvider {
         .map(res => {
           let media = res.json()
           return media
-        }, (error) => {
-          console.error(error)
-          return
-        })
-  }
-
-  getAvaliacoesAprovadas(idMedico): Observable<any> {
-    var endpoint = "/api" + "/api/avaliacao/aprovada/" + idMedico + "/";
-    let header = new Headers();
-    let options = new RequestOptions({headers: header});
-
-    header.append('Content-Type', 'application/json');
-
-    return this.http.get(endpoint, options)
-        .map(res => {
-          return res.json()
         }, (error) => {
           console.error(error)
           return

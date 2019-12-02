@@ -65,6 +65,17 @@ export class VisualizaMedicoPage {
     this.getAvaliacoesAprovadas()
   }
 
+  goToMaps(){
+    let address = this.medico.clinicas[0].rua + ', ' + this.medico.clinicas[0].numero + ' - ' + this.medico.clinicas[0].cidade + ', ' + this.medico.clinicas[0].estado
+    this.http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + address + ',+BR&key=AIzaSyAvVri_2o8xcZ4mcpjctJlFcR93-_nIzwI')
+    .subscribe(res => {
+      let lat = res.json().results[0].geometry.location.lat
+      let long = res.json().results[0].geometry.location.lng
+      console.log(lat, long)
+      window.open('https://www.google.com/maps/dir//'+lat+','+long, '_system')
+    })
+  }
+
   getAvaliacoesAprovadas(){
     this.avaliacaoProvider.getAvaliacoesAprovadas(this.medico.id).subscribe((result) => {
       this.avaliacoesAprovadas = result
@@ -127,16 +138,15 @@ export class VisualizaMedicoPage {
       if (res.json().status === 'OK') {
         this.addMarker(nomeFantasia, this.coorResult);
       }else{
-        console.log('Opss...RETURN');
         return;
       } 
     }, (err) => {
-      console.log(err);
+      console.error(err);
     });
   }
 
   addMarker(nomeFantasia, results) {
-    let iconMed = 'assets/imgs/clickMarker.png';
+    let iconMed = 'assets/imgs/pin.png';
     let marker = new google.maps.Marker({
       position: results[0].geometry.location,
       map: this.map,

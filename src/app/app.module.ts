@@ -86,7 +86,7 @@ import { IonTagsInputModule } from "ionic-tags-input";
     ConvenioProvider,
     AuthProvider,
     ToastProvider,
-    AvaliacaoProvider
+    AvaliacaoProvider,
   ],
   schemas: [ 
     CUSTOM_ELEMENTS_SCHEMA

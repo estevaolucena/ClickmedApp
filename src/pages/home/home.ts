@@ -7,6 +7,8 @@ import { ToastProvider } from '../../providers/toast/toast';
 import { LoginPage } from '../../pages/login/login' 
 import { CadastroPage } from '../cadastro/cadastro';
 import { AuthProvider } from '../../providers/auth/auth';
+import { AlertController } from 'ionic-angular';
+
 
 export interface PagesInterface {
   title: String,
@@ -27,7 +29,8 @@ export class HomePage {
     public navParams: NavParams, 
     private buscaProvider: BuscaProvider,
     private toastProvider: ToastProvider,
-    private authProvider: AuthProvider) {
+    private authProvider: AuthProvider,
+    private alertCtrl: AlertController) {
   }
 
   pages: PagesInterface[]
@@ -39,7 +42,7 @@ export class HomePage {
   menuItens(){
     if (this.userLogged() == true) {
       this.pages = [
-        {title: 'Meus dados', pageName: 'MeusDadosPage', icon: 'log-out'},
+        // {title: 'Meus dados', pageName: 'MeusDadosPage', icon: 'log-out'},
         {title: 'Sair', pageName: 'Logout', icon: 'log-out'}
       ] 
     } else {
@@ -60,9 +63,26 @@ export class HomePage {
   }
   
   logout(){
-    this.authProvider.logout()
-    this.navCtrl.setRoot(HomePage)
-    this.navCtrl.setRoot(this.navCtrl.getActive().component);
+    let alert = this.alertCtrl.create({
+      title: 'Confirmação',
+      message: 'Deseja realmente sair?',
+      buttons: [
+        {
+          text: 'Não',
+          handler: () => { 
+          }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            this.authProvider.logout()
+            this.navCtrl.setRoot(HomePage)
+            this.navCtrl.setRoot(this.navCtrl.getActive().component);
+          }
+        },
+      ]
+    })
+    alert.present();    
   }
   
   userLogged(){
@@ -86,7 +106,7 @@ export class HomePage {
           this.navCtrl.push(ResultadoBuscaPage, medicos);
           this.stringBusca ='';
         } else {
-          this.toastProvider.exibirToast('Não há resultados para esta pesquisa');
+          this.toastProvider.exibirToast('Tente pesquisar pelo nome do profissional, especialidade ou localização :)');
         }
         
       }, error => {

@@ -24,8 +24,14 @@
     background-color: #efefef;
 }
 
-.title{
+.card-md .title{
     font-weight: bold;
+    font-size: 16px;
+    color: #00c3a5;
+}
+
+a{
+    color:#222;
 }
 
 .title-app{
@@ -70,4 +76,17 @@
     border-top-right-radius: 100px;
     border: 1px solid #FAFAFA;
     background-color: #00c3a5;
+}
+
+.item-md h2 {
+    font-weight: 500;
+}
+
+.searchbar-md .searchbar-search-icon {
+    top: 21px;
+}
+
+.searchbar-md .searchbar-input{
+    border-radius: 20px;
+    line-height: 5rem;
 }

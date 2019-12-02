@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
 import { MedicoProvider } from '../../providers/medico/medico';
 import { Especialidade } from '../../model/especialidade';
 import { Clinica } from '../../model/clinica';
@@ -7,8 +7,7 @@ import { Convenio } from '../../model/convenio';
 import { EspecialidadeProvider } from '../../providers/especialidade/especialidade';
 import { ClinicaProvider } from '../../providers/clinica/clinica';
 import { ConvenioProvider } from '../../providers/convenio/convenio';
-import { ToastProvider } from '../../providers/toast/toast';
-import { HomePage } from '../home/home';
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -79,11 +78,11 @@ export class CadastroMedicoPage {
   
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
-    private toastProvider:	ToastProvider,
     private especialidadeProvider: EspecialidadeProvider,
     private medicoProvider: MedicoProvider,
     private convenioProvider: ConvenioProvider,
-    private clinicaProvider: ClinicaProvider) {
+    private clinicaProvider: ClinicaProvider,
+    private alertCtrl: AlertController) {
   }
     
   ionViewDidLoad() {
@@ -95,10 +94,27 @@ export class CadastroMedicoPage {
   inserirMedico(){
     console.log(this.medico);
     if (this.medicoProvider.insereMedico(this.medico) == true) {
-      this.toastProvider.exibirToast("Cadastro realizado com sucesso");
-      this.navCtrl.push(HomePage);
+      let alert = this.alertCtrl.create({
+        title: 'Sucesso',
+        message: 'Seu cadastro foi realizado com sucesso. Agora é só fazer login :)',
+        buttons: [
+          {
+            text: 'Entendi',
+            role: 'entendi',
+            handler: () => {
+              this.navCtrl.push(LoginPage);
+            }
+          }
+        ]
+      });
+      alert.present();
     } else {
-      this.toastProvider.exibirToast("Ocorreu um erro.");
+      let alert = this.alertCtrl.create({
+        title: 'Ops',
+        subTitle: 'Parece que ocorreu um erro, tente novamente.',
+        buttons: ['Entendi']
+      });
+      alert.present();
     }
   }
 

@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AvaliacaoProvider } from '../../providers/avaliacao/avaliacao';
 import { Medico } from '../../model/medico';
 import { AuthProvider } from '../../providers/auth/auth';
 import { Paciente } from '../../model/paciente';
 import { Avaliacao } from '../../model/avaliacao';
-import { VisualizaMedicoPage } from '../visualiza-medico/visualiza-medico';
 
 @IonicPage()
 @Component({
@@ -19,6 +18,8 @@ export class AvaliacaoPage {
     medico: {},
     paciente: {},
   }
+
+  dateLimit: String = new Date().toISOString();
 
   medico: Medico = {}
 
@@ -35,7 +36,8 @@ export class AvaliacaoPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public avaliacaoProvider: AvaliacaoProvider,
-    public authProvider: AuthProvider) {
+    public authProvider: AuthProvider,
+    private alertCtrl: AlertController) {
       this.medico = this.navParams.data; 
   }
 
@@ -44,14 +46,49 @@ export class AvaliacaoPage {
   }
 
   inserirAvaliacao(avaliacao){
-    let jsonObject = this.getUser()
-    let usuarioLogado = JSON.parse(jsonObject)
-    this.avaliacao.paciente.id = usuarioLogado.id
-    this.avaliacao.medico.id = this.medico.id
-    this.avaliacao.respostamed = "0"
-    this.avaliacao.avaliacao = avaliacao.avaliacao.map(x=>x.name).join(", ")
-    this.avaliacaoProvider.inserirAvaliacao(avaliacao)
-    this.goToVisualizaMedico(this.medico)
+    let alert = this.alertCtrl.create({
+      title: 'Confirmação',
+      message: 'Deseja realmente salvar esta avaliação?',
+      buttons: [
+        {
+          text: 'Não',
+          handler: () => { 
+          }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            let jsonObject = this.getUser()
+            let usuarioLogado = JSON.parse(jsonObject)
+            this.avaliacao.paciente.id = usuarioLogado.id
+            this.avaliacao.medico.id = this.medico.id
+            this.avaliacao.respostamed = "0"
+            this.avaliacao.avaliacao = avaliacao.avaliacao.map(x=>x.name).join(", ")
+            this.avaliacaoProvider.inserirAvaliacao(avaliacao)
+            .subscribe(res => {
+              if (res.status == 200) {
+                let alert = this.alertCtrl.create({
+                  title: 'Avaliação em aprovação',
+                  subTitle: 'A data deste atendimento será confirmada pelo médico(a) antes de ficar visível no app :)',
+                  buttons: ['Entendi']
+                });
+                alert.present();
+                this.navCtrl.pop()
+              } else {
+                let alert = this.alertCtrl.create({
+                  title: 'Ops, ocorreu um problema',
+                  subTitle: 'Nossos incríveis engenheiros já foram acionados, tente novamente mais tarde :)',
+                  buttons: ['Entendi']
+                });
+                alert.present();
+                this.navCtrl.pop()
+              }
+            })            
+            }
+          },
+        ]
+      })
+      alert.present();
   }
 
   loadTags(){
@@ -61,10 +98,6 @@ export class AvaliacaoPage {
   getUser(){
     let usuario = this.authProvider.getUser
     return usuario
-  }
-
-  goToVisualizaMedico(medico: Medico){
-    this.navCtrl.pop()
   }
 
   logRatingChange(rating){     

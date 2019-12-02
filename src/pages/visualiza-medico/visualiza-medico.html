@@ -23,12 +23,13 @@
     <hr>
     <ion-row>
       <ion-col *ngFor="let	clinica of medico.clinicas">
+        <p class="title">Endereço: </p>
         <ion-icon name="pin"></ion-icon>  {{clinica.rua}}, {{clinica.numero}} - {{clinica.cidade}}/{{clinica.estado}}
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <p class="title" >Telefone: {{medico.telefone1}} | {{medico.telefone2}}</p>
+        <p class="title">Telefone: </p><a> {{medico.telefone1}} | {{medico.telefone2}}</a>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -119,12 +120,21 @@
   <ion-card padding>    
     <ion-row>
       <ion-col>
-        <h5>Localização:</h5>
+        <h5 class="title">Localização:</h5>
         <hr>
+        <button ion-button full class="card-button" (click)="goToMaps()">Traçar rota</button>  
         <div #map id="map"></div>
       </ion-col>
     </ion-row>
   </ion-card>
+
+  <ion-fab right bottom edge class="fab-options">
+    <button ion-fab mini><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab (click)="goToMaps()"><ion-icon name="map"></ion-icon></button>
+      <button ion-fab (click)="avaliarMedico(medico)"><ion-icon name="star-half"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>
 
 

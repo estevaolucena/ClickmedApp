@@ -10,10 +10,10 @@
 
 <ion-content padding>
   <form (ngSubmit)="inserirClinica(clinica)" #formulario="ngForm">
+    <ion-input [(ngModel)]="clinica.id" type="hidden" name="id"></ion-input>
     <ion-item>
       <ion-label stacked>Nome Fantasia</ion-label>
       <ion-input [(ngModel)]="clinica.nomeFantasia" type="text" name="nomeFantasia"></ion-input>
-      <ion-input [(ngModel)]="clinica.id" type="hidden" name="id"></ion-input>    
     </ion-item>
     <ion-item>
       <ion-label stacked>Razão Social</ion-label>

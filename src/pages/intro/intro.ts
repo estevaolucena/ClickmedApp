@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Tab } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 
 @IonicPage()
@@ -13,6 +13,6 @@ export class IntroPage {
   }
 
   goToTabsPage (){
-    this.navCtrl.push(TabsPage);
+    this.navCtrl.setRoot(TabsPage);
   }
 }

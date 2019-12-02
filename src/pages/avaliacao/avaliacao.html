@@ -27,7 +27,15 @@
     </ion-item>
     <ion-item>
       <ion-label>Qual foi a data da sua consulta?</ion-label>
-      <ion-datetime [(ngModel)]="avaliacao.descricao" displayFormat="DD MM YYYY" pickerFormat="DD MM YYYY" name="descricao"></ion-datetime>
+      <ion-datetime 
+        [(ngModel)]="avaliacao.descricao" 
+        displayFormat="DD MM YYYY" 
+        pickerFormat="DD MM YYYY"
+        min="2018-01-01"
+        max="{{dateLimit}}"
+        name="descricao" 
+        placeholder="Data da consulta">
+      </ion-datetime>
     </ion-item>  
     <ion-item>
       <ion-label stacked>Quais foram os pontos fortes da sua consulta?</ion-label>

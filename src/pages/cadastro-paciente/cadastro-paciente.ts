@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { PacienteProvider } from '../../providers/paciente/paciente';
-import { HomePage } from '../home/home';
-import { ToastProvider } from '../../providers/toast/toast';
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -43,18 +42,36 @@ export class CadastroPacientePage {
     }    
   }
   
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
-              private pacienteProvider: PacienteProvider,
-              private toastProvider: ToastProvider) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private pacienteProvider: PacienteProvider,
+    private alertCtrl: AlertController)  {
   }
 
   inserirPaciente(){
     if (this.pacienteProvider.inserePaciente(this.paciente) == true) {
-      this.toastProvider.exibirToast("Cadastro realizado com sucesso");
-      this.navCtrl.push(HomePage);
+      let alert = this.alertCtrl.create({
+        title: 'Sucesso',
+        message: 'Seu cadastro foi realizado com sucesso. Agora é só fazer login :)',
+        buttons: [
+          {
+            text: 'Entendi',
+            role: 'entendi',
+            handler: () => {
+              this.navCtrl.push(LoginPage);
+            }
+          }
+        ]
+      });
+      alert.present();
     } else {
-      this.toastProvider.exibirToast("Ocorreu um erro.");
+      let alert = this.alertCtrl.create({
+        title: 'Ops',
+        subTitle: 'Parece que ocorreu um erro, tente novamente.',
+        buttons: ['Entendi']
+      });
+      alert.present();
     }
   }
 
